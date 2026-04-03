@@ -77,6 +77,8 @@
 
     .registro-card h2 { margin-bottom: 20px; }
 
+    .registro-card form { width: 100%; }
+
     .registro-card input {
       width: 100%;
       padding: 12px;
@@ -460,10 +462,11 @@
     <div class="registro-card">
       <div class="logo-registro-svg">IP</div>
       <h2>Crear cuenta</h2>
-      <input type="text" id="usuario" placeholder="Usuario">
-      <input type="password" id="clave" placeholder="Contraseña">
-      <!-- FIX: se pasa event para evitar submit accidental en PC -->
-      <button onclick="registrar(event)">REGISTRAR</button>
+      <form onsubmit="registrar(event)">
+        <input type="text" id="usuario" placeholder="Usuario" autocomplete="username">
+        <input type="password" id="clave" placeholder="Contraseña" autocomplete="current-password">
+        <button type="submit">REGISTRAR</button>
+      </form>
     </div>
   </div>
 
@@ -689,7 +692,7 @@
           <div class="info">
             <h3>Información</h3>
             <p>📞 +1 809 000 0000</p>
-            <p>📧 innovaprint@gmail.com</p>
+            <p>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="79101717160f18090b10170d391e14181015571a1614">[email&#160;protected]</a></p>
             <p>📍 Santo Domingo, República Dominicana</p>
             <p>🕒 Lun — Sáb | 8:00 AM — 6:00 PM</p>
             <div class="social">
@@ -724,40 +727,34 @@
   </div>
 
   <script>
-    // Al cargar la página, si ya hay sesión activa se salta el registro
+    // Al cargar la página: si ya hay sesión, ocultar registro y mostrar portal
     window.onload = function () {
       if (localStorage.getItem("usuario")) {
-        mostrarPortal();
+        document.getElementById("registro").style.display = "none";
+        document.getElementById("portal").style.display = "block";
       }
     };
 
-    // FIX: se recibe event para prevenir cualquier submit accidental en PC
     function registrar(event) {
-      if (event) event.preventDefault();
-
+      event.preventDefault();
       const usuario = document.getElementById("usuario").value.trim();
       const clave   = document.getElementById("clave").value.trim();
 
       if (usuario && clave) {
         localStorage.setItem("usuario", usuario);
-        mostrarPortal();
+        // Ocultar registro, mostrar portal y redirigir al inicio
+        document.getElementById("registro").style.display = "none";
+        document.getElementById("portal").style.display = "block";
+        window.location.hash = "#inicio";
       } else {
         alert("Completa los campos");
       }
     }
 
-    function mostrarPortal() {
-      document.getElementById("registro").style.display = "none";
-      document.getElementById("portal").style.display   = "block";
-    }
-
     function cerrarSesion(event) {
       if (event) event.preventDefault();
       localStorage.removeItem("usuario");
-      document.getElementById("portal").style.display   = "none";
+      document.getElementById("portal").style.display = "none";
       document.getElementById("registro").style.display = "flex";
     }
   </script>
-
-</body>
-</html>
