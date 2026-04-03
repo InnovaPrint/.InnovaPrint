@@ -534,11 +534,6 @@
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="cards">
           <div class="card">
-            <div class="icon">✨</div>
-            <h3>Diseño &amp; Entrega</h3>
-            <p>Diseño, producción, personalización y entrega de experiencias únicas que reflejan tu estilo en cada detalle.</p>
-          </div>
-          <div class="card">
             <div class="icon">👗</div>
             <h3>Prendas Personalizadas</h3>
             <p>Diseño, creación y personalización de prendas pensadas para expresar identidad y destacar con autenticidad.</p>
@@ -688,7 +683,7 @@
           <div class="info">
             <h3>Información</h3>
             <p>📞 +1 809 000 0000</p>
-            <p>📧 innovaprint@gmail.com</p>
+            <p>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="640d0a0a0b120514160d0a10240309050d084a070b09">[email&#160;protected]</a></p>
             <p>📍 Santo Domingo, República Dominicana</p>
             <p>🕒 Lun — Sáb | 8:00 AM — 6:00 PM</p>
             <div class="social">
@@ -764,7 +759,7 @@
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ===== SESIÓN ===== */
     window.onload = function () {
       if (localStorage.getItem("usuario")) {
@@ -909,13 +904,4 @@
     /* ===== TOAST ===== */
     let toastTmr;
     function toast(msg) {
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.classList.add("visible");
-      clearTimeout(toastTmr);
-      toastTmr = setTimeout(() => t.classList.remove("visible"), 2600);
-    }
-  </script>
-
-</body>
-</html>
+      const t =
