@@ -157,9 +157,30 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
     }
 
-    .hero h1, .page-hero h1, .contact h1 {
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin: 0 auto 28px;
+      display: block;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .hero-slogan {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .page-hero h1, .contact h1 {
       font-size: 56px;
       margin-bottom: 15px;
       text-shadow: 0 8px 25px rgba(0,0,0,.35);
@@ -413,7 +434,7 @@
 
     @media (max-width: 992px) {
       header { padding: 18px 24px; }
-      .hero h1, .page-hero h1, .contact h1 { font-size: 42px; }
+      .page-hero h1, .contact h1 { font-size: 42px; }
       .catalogo { grid-template-columns: repeat(2, 1fr); }
       .moving-section, .about-content { padding: 60px 24px; }
     }
@@ -422,7 +443,9 @@
       header { flex-direction: column; align-items: flex-start; }
       nav { gap: 14px; }
       .hero, .page-hero, .contact, .catalogo-section { padding: 70px 20px; }
-      .hero h1, .page-hero h1, .catalogo-section h1, .contact h1 { font-size: 34px; }
+      .page-hero h1, .catalogo-section h1, .contact h1 { font-size: 34px; }
+      .hero-slogan { font-size: 22px; }
+      .hero-logo { width: 140px; height: 140px; }
       .moving-text { font-size: 20px; gap: 30px; }
       .moving-right h2 { font-size: 28px; }
       .catalogo { grid-template-columns: 1fr; }
@@ -432,16 +455,19 @@
 </head>
 <body>
 
+  <!-- ===== PANTALLA DE REGISTRO ===== -->
   <div id="registro">
     <div class="registro-card">
       <div class="logo-registro-svg">IP</div>
       <h2>Crear cuenta</h2>
       <input type="text" id="usuario" placeholder="Usuario">
       <input type="password" id="clave" placeholder="Contraseña">
-      <button onclick="registrar()">REGISTRAR</button>
+      <!-- FIX: se pasa event para evitar submit accidental en PC -->
+      <button onclick="registrar(event)">REGISTRAR</button>
     </div>
   </div>
 
+  <!-- ===== PORTAL PRINCIPAL ===== -->
   <div id="portal">
     <header>
       <h2 class="brand">InnovaPrint</h2>
@@ -451,20 +477,23 @@
         <a href="#catalogo">Catálogo</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#contacto">Contacto</a>
-        <a href="#" onclick="cerrarSesion()">Salir</a>
+        <a href="#" onclick="cerrarSesion(event)">Salir</a>
       </nav>
     </header>
 
     <main>
 
+      <!-- ===== HERO — LOGO + ESLOGAN ===== -->
       <section class="hero" id="inicio">
-        <h1>InnovaPrint</h1>
-        <p>
-          Transformamos tus ideas en productos personalizados de alta calidad
-          con diseños únicos y tecnología de impresión profesional.
-        </p>
+        <img
+          src="https://i.postimg.cc/PxjXTrjq/Whats-App-Image-2026-04-02-at-10-43-35-PM.jpg"
+          alt="InnovaPrint Logo"
+          class="hero-logo"
+        >
+        <p class="hero-slogan">Donde Tus Ideas Se Convierten En Estilo</p>
       </section>
 
+      <!-- ===== TEXTO EN MOVIMIENTO ===== -->
       <section class="moving-section">
         <div class="moving-left">
           <div class="moving-wrapper">
@@ -499,6 +528,7 @@
         </div>
       </section>
 
+      <!-- ===== SERVICIOS ===== -->
       <section class="services" id="servicios">
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="cards">
@@ -535,6 +565,7 @@
         </div>
       </section>
 
+      <!-- ===== CATÁLOGO ===== -->
       <section class="catalogo-section" id="catalogo">
         <h1>Catálogo</h1>
         <p>Productos personalizados con calidad profesional.</p>
@@ -597,6 +628,7 @@
         </div>
       </section>
 
+      <!-- ===== NOSOTROS ===== -->
       <section class="page-hero" id="nosotros">
         <h1>Sobre Nosotros</h1>
         <p>Conoce quiénes somos y por qué InnovaPrint es tu mejor aliado creativo.</p>
@@ -648,6 +680,7 @@
         </div>
       </section>
 
+      <!-- ===== CONTACTO ===== -->
       <section class="contact" id="contacto">
         <h1>Contáctanos</h1>
         <p class="sub">¿Tienes una idea o proyecto? Escríbenos y lo hacemos realidad.</p>
@@ -656,12 +689,13 @@
           <div class="info">
             <h3>Información</h3>
             <p>📞 +1 809 000 0000</p>
-            <p>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="debdb1b0aabfbdaab19eb7b0b0b1a8bfaeacb7b0aaf0bdb1b3">[email&#160;protected]</a></p>
+            <p>📧 innovaprint@gmail.com</p>
             <p>📍 Santo Domingo, República Dominicana</p>
             <p>🕒 Lun — Sáb | 8:00 AM — 6:00 PM</p>
             <div class="social">
               <span>Síguenos:</span>
-              <a href="https://www.instagram.com/innovaprint_rd?igsh=MTc0bTMxOGRzbnBobg%3D%3D&utm_source=qr" target="_blank">Instagram</a>
+              <!-- FIX: link de Instagram corregido y funcional -->
+              <a href="https://www.instagram.com/innovaprint_rd?igsh=MTc0bTMxOGRzbnBobg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
               <a href="#">Facebook</a>
               <a href="#">WhatsApp</a>
             </div>
@@ -669,6 +703,7 @@
 
           <div class="form">
             <h3>Envíanos un mensaje</h3>
+            <!-- Formulario de contacto — action apunta a formsubmit, independiente del registro -->
             <form action="https://formsubmit.co/marvinhernandez0828@gmail.com" method="POST">
               <input type="text" name="nombre" placeholder="Nombre" required>
               <input type="email" name="correo" placeholder="Correo electrónico" required>
@@ -688,14 +723,18 @@
     </footer>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
+    // Al cargar la página, si ya hay sesión activa se salta el registro
     window.onload = function () {
       if (localStorage.getItem("usuario")) {
         mostrarPortal();
       }
     };
 
-    function registrar() {
+    // FIX: se recibe event para prevenir cualquier submit accidental en PC
+    function registrar(event) {
+      if (event) event.preventDefault();
+
       const usuario = document.getElementById("usuario").value.trim();
       const clave   = document.getElementById("clave").value.trim();
 
@@ -708,4 +747,17 @@
     }
 
     function mostrarPortal() {
-      document.getElementById("regis
+      document.getElementById("registro").style.display = "none";
+      document.getElementById("portal").style.display   = "block";
+    }
+
+    function cerrarSesion(event) {
+      if (event) event.preventDefault();
+      localStorage.removeItem("usuario");
+      document.getElementById("portal").style.display   = "none";
+      document.getElementById("registro").style.display = "flex";
+    }
+  </script>
+
+</body>
+</html>
