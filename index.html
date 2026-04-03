@@ -472,10 +472,10 @@
     <div class="registro-card">
       <div class="logo-registro-svg">IP</div>
       <h2>Crear cuenta</h2>
-      <form onsubmit="registrar(event)">
+      <form onsubmit="return false;">
         <input type="text" id="usuario" placeholder="Usuario" autocomplete="username">
         <input type="password" id="clave" placeholder="Contraseña" autocomplete="current-password">
-        <button type="submit">REGISTRAR</button>
+        <button type="button" onclick="registrar()">REGISTRAR</button>
       </form>
     </div>
   </div>
@@ -768,8 +768,7 @@
       }
     };
 
-    function registrar(event) {
-      event.preventDefault();
+    function registrar() {
       const usuario = document.getElementById("usuario").value.trim();
       const clave   = document.getElementById("clave").value.trim();
       if (usuario && clave) {
