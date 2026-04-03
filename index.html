@@ -773,9 +773,7 @@
       const clave   = document.getElementById("clave").value.trim();
       if (usuario && clave) {
         localStorage.setItem("usuario", usuario);
-        document.getElementById("registro").style.display = "none";
-        document.getElementById("portal").style.display = "block";
-        window.location.hash = "#inicio";
+        window.location.href = window.location.pathname;
       } else {
         alert("Completa los campos");
       }
