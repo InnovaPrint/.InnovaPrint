@@ -304,7 +304,6 @@
     .btn-cancelar:hover { background:#e2e8f0; }
 
     /* ===== PANEL CARRITO ===== */
-    /* No divide la pantalla: es un card flotante centrado */
     .carrito-panel {
       display:none; position:fixed;
       top:50%; left:50%;
@@ -491,7 +490,6 @@
         <a href="#catalogo">Catálogo</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#contacto">Contacto</a>
-        <!-- Botón carrito: oculto hasta que se añada un producto -->
         <button id="nav-carrito-btn" onclick="abrirCarrito()">
           🛒 Carrito
           <span class="carrito-badge" id="badge">0</span>
@@ -531,15 +529,40 @@
         </div>
       </section>
 
+      <!-- ===== SERVICIOS (actualizado) ===== -->
       <section class="services" id="servicios">
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="cards">
-          <div class="card"><div class="icon">💡</div><h3>Ideación y Estructura</h3><p>Aterrizamos tu idea y creamos una base sólida para tu negocio.</p></div>
-          <div class="card"><div class="icon">🎯</div><h3>Branding e Identidad</h3><p>Diseñamos una imagen profesional que destaque tu marca.</p></div>
-          <div class="card"><div class="icon">📊</div><h3>Planificación Financiera</h3><p>Estrategias para asegurar estabilidad y crecimiento.</p></div>
-          <div class="card"><div class="icon">📱</div><h3>Marketing Digital</h3><p>Campañas que atraen clientes y hacen crecer tu negocio.</p></div>
-          <div class="card"><div class="icon">⚖️</div><h3>Asesoría Legal</h3><p>Te ayudamos con todos los procesos legales.</p></div>
-          <div class="card"><div class="icon">🤝</div><h3>Mentoría Continua</h3><p>Acompañamiento constante para escalar tu negocio.</p></div>
+          <div class="card">
+            <div class="icon">✨</div>
+            <h3>Diseño &amp; Entrega</h3>
+            <p>Diseño, producción, personalización y entrega de experiencias únicas que reflejan tu estilo en cada detalle.</p>
+          </div>
+          <div class="card">
+            <div class="icon">👗</div>
+            <h3>Prendas Personalizadas</h3>
+            <p>Diseño, creación y personalización de prendas pensadas para expresar identidad y destacar con autenticidad.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🎨</div>
+            <h3>De la Idea a la Entrega</h3>
+            <p>Desde la idea hasta la entrega: diseñamos, confeccionamos y personalizamos moda hecha para ti.</p>
+          </div>
+          <div class="card">
+            <div class="icon">💡</div>
+            <h3>Conceptualización</h3>
+            <p>Conceptualizamos, diseñamos y producimos prendas únicas que transforman tu visión en realidad.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Innovación Total</h3>
+            <p>Innovación en diseño, precisión en producción y personalización total para un estilo sin límites.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📖</div>
+            <h3>Tu Historia en Moda</h3>
+            <p>Creamos más que ropa: diseñamos, fabricamos y personalizamos piezas que cuentan tu historia.</p>
+          </div>
         </div>
       </section>
 
@@ -714,7 +737,7 @@
     </div>
   </div>
 
-  <!-- ===== PANEL CARRITO (card flotante centrado) ===== -->
+  <!-- ===== PANEL CARRITO ===== -->
   <div class="carrito-panel" id="carrito-panel">
     <div class="carrito-head">
       <div class="carrito-head-left">
@@ -775,7 +798,6 @@
     let carrito = [];
     let productoActual = null;
 
-    /* -- Modal de confirmación -- */
     function abrirModal(nombre, precio, img, num) {
       productoActual = { nombre, precio, img, num };
       document.getElementById("m-img").src = img;
@@ -804,7 +826,6 @@
       toast("✅ " + productoActual.nombre + " añadido");
     }
 
-    /* -- Panel carrito -- */
     function abrirCarrito() {
       renderLista();
       document.getElementById("carrito-panel").classList.add("abierto");
@@ -872,11 +893,9 @@
       document.getElementById("items-count").textContent = totalItems;
       document.getElementById("badge").textContent = totalItems;
 
-      /* Botón carrito en nav: solo visible si hay productos */
       const btn = document.getElementById("nav-carrito-btn");
       btn.style.display = totalItems > 0 ? "flex" : "none";
 
-      /* Si el carrito queda vacío y el panel está abierto, cerrarlo */
       if (totalItems === 0) cerrarCarrito();
     }
 
