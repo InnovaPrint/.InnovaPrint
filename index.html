@@ -16,449 +16,459 @@
       --blue-soft: #38bdf8;
       --text: #334155;
       --muted: #64748b;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      --shadow: 0 20px 50px rgba(0,0,0,0.15);
       --radius: 18px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--bg); color:var(--dark); }
+    img { max-width:100%; display:block; }
+    a { text-decoration:none; }
+    ul { list-style:none; }
+    #portal { display:none; }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--dark);
-    }
-
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; }
-    ul { list-style: none; }
-
-    #portal { display: none; }
-
+    /* ===== REGISTRO ===== */
     #registro {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
+      position:fixed; width:100%; height:100vh;
+      background:linear-gradient(135deg,#0f172a,#1e293b);
+      display:flex; justify-content:center; align-items:center; z-index:9999;
     }
-
     .registro-card {
-      background: var(--white);
-      padding: 40px;
-      border-radius: 20px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+      background:var(--white); padding:40px; border-radius:20px;
+      width:320px; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,.45);
     }
-
     .logo-registro-svg {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 15px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #2563eb, #0f172a);
-      font-size: 32px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -2px;
+      width:100px; height:100px; margin:0 auto 15px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#2563eb,#0f172a);
+      font-size:32px; font-weight:900; color:#fff; letter-spacing:-2px;
     }
-
-    .registro-card h2 { margin-bottom: 20px; }
-
-    .registro-card form { width: 100%; }
-
+    .registro-card h2 { margin-bottom:20px; }
+    .registro-card form { width:100%; }
     .registro-card input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      outline: none;
+      width:100%; padding:12px; margin:8px 0;
+      border-radius:10px; border:1px solid #cbd5e1; outline:none;
     }
-
     .registro-card button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 12px;
-      background: var(--blue);
-      color: var(--white);
-      font-weight: bold;
-      cursor: pointer;
-      transition: .3s;
+      width:100%; padding:12px; margin-top:15px; border:none;
+      border-radius:12px; background:var(--blue); color:var(--white);
+      font-weight:bold; cursor:pointer; transition:.3s;
     }
+    .registro-card button:hover { transform:translateY(-3px); background:var(--blue-dark); }
 
-    .registro-card button:hover {
-      transform: translateY(-3px);
-      background: var(--blue-dark);
-    }
-
+    /* ===== HEADER ===== */
     header {
-      position: sticky;
-      top: 0;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(10px);
-      color: var(--white);
-      padding: 18px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-      z-index: 1000;
+      position:sticky; top:0;
+      background:rgba(15,23,42,0.92); backdrop-filter:blur(10px);
+      color:var(--white); padding:18px 60px;
+      display:flex; justify-content:space-between; align-items:center; gap:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.25); z-index:1000;
     }
-
-    .brand { font-size: 28px; font-weight: 700; }
-    nav { display: flex; flex-wrap: wrap; gap: 18px; }
-
+    .brand { font-size:28px; font-weight:700; }
+    nav { display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
     nav a {
-      color: var(--white);
-      font-weight: bold;
-      position: relative;
-      transition: .3s;
+      color:var(--white); font-weight:bold;
+      position:relative; transition:.3s;
     }
-
     nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 2px;
-      background: var(--blue-soft);
-      transition: .3s;
+      content:""; position:absolute; left:0; bottom:-6px;
+      width:0; height:2px; background:var(--blue-soft); transition:.3s;
+    }
+    nav a:hover { color:var(--blue-soft); }
+    nav a:hover::after { width:100%; }
+
+    /* Botón carrito en nav — oculto por defecto */
+    #nav-carrito-btn {
+      display:none;
+      align-items:center; gap:8px;
+      background:var(--blue); color:var(--white) !important;
+      padding:8px 18px; border-radius:50px;
+      font-weight:700; font-size:14px;
+      cursor:pointer; border:none; transition:.3s;
+      position:relative;
+    }
+    #nav-carrito-btn:hover { background:var(--blue-dark); transform:translateY(-2px); }
+    #nav-carrito-btn::after { display:none !important; }
+
+    .carrito-badge {
+      background:#ef4444; color:#fff;
+      font-size:11px; font-weight:900;
+      width:20px; height:20px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      position:absolute; top:-8px; right:-8px;
     }
 
-    nav a:hover { color: var(--blue-soft); }
-    nav a:hover::after { width: 100%; }
-
+    /* ===== HERO ===== */
     .hero, .page-hero, .contact {
-      background: linear-gradient(120deg, #2563eb, #1e40af, #0f172a);
-      background-size: 300% 300%;
-      animation: fondo 10s ease infinite;
-      color: var(--white);
-      text-align: center;
-      padding: 90px 20px;
+      background:linear-gradient(120deg,#2563eb,#1e40af,#0f172a);
+      background-size:300% 300%; animation:fondo 10s ease infinite;
+      color:var(--white); text-align:center; padding:90px 20px;
     }
-
     .hero {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      min-height:90vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
     }
-
     .hero-logo {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 20px;
-      margin: 0 auto 28px;
-      display: block;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      width:180px; height:180px; object-fit:cover; border-radius:20px;
+      margin:0 auto 28px; box-shadow:0 8px 30px rgba(0,0,0,0.4);
     }
-
     .hero-slogan {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      opacity: 0.95;
-      max-width: 600px;
-      margin: 0 auto;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-size:28px; font-weight:700; letter-spacing:.5px;
+      opacity:.95; max-width:600px; margin:0 auto;
+      text-shadow:0 4px 15px rgba(0,0,0,0.3);
     }
-
     .page-hero h1, .contact h1 {
-      font-size: 56px;
-      margin-bottom: 15px;
-      text-shadow: 0 8px 25px rgba(0,0,0,.35);
+      font-size:56px; margin-bottom:15px;
+      text-shadow:0 8px 25px rgba(0,0,0,.35);
     }
-
     .hero p, .page-hero p, .contact .sub {
-      max-width: 760px;
-      margin: 0 auto;
-      font-size: 18px;
-      opacity: .95;
+      max-width:760px; margin:0 auto; font-size:18px; opacity:.95;
     }
-
     @keyframes fondo {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0%   { background-position:0% 50%; }
+      50%  { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 15px;
-      color: var(--dark);
-    }
+    /* ===== SECCIONES ===== */
+    .section-title { text-align:center; font-size:36px; margin-bottom:15px; color:var(--dark); }
 
     .moving-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 80px 60px;
-      gap: 40px;
-      background: var(--white);
-      flex-wrap: wrap;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:80px 60px; gap:40px; background:var(--white); flex-wrap:wrap;
     }
-
-    .moving-left, .moving-right { flex: 1; min-width: 320px; }
-
-    .moving-left {
-      overflow: hidden;
-      border-radius: 20px;
-      background: var(--dark);
-      padding: 30px;
-    }
-
-    .moving-wrapper { height: 60px; overflow: hidden; position: relative; }
-
+    .moving-left, .moving-right { flex:1; min-width:320px; }
+    .moving-left { overflow:hidden; border-radius:20px; background:var(--dark); padding:30px; }
+    .moving-wrapper { height:60px; overflow:hidden; position:relative; }
     .moving-text {
-      display: inline-flex;
-      gap: 60px;
-      white-space: nowrap;
-      font-size: 28px;
-      font-weight: bold;
-      color: var(--blue-soft);
-      animation: mover 18s linear infinite;
+      display:inline-flex; gap:60px; white-space:nowrap;
+      font-size:28px; font-weight:bold; color:var(--blue-soft);
+      animation:mover 18s linear infinite;
     }
-
-    .moving-text:hover { animation-play-state: paused; }
-
+    .moving-text:hover { animation-play-state:paused; }
     @keyframes mover {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0%   { transform:translateX(0); }
+      100% { transform:translateX(-50%); }
     }
+    .moving-right h2 { font-size:34px; margin-bottom:20px; color:var(--dark); }
+    .moving-right p  { font-size:18px; margin-bottom:20px; color:var(--text); }
+    .moving-right li { margin-bottom:10px; font-size:17px; color:#1e293b; }
 
-    .moving-right h2 { font-size: 34px; margin-bottom: 20px; color: var(--dark); }
-    .moving-right p  { font-size: 18px; margin-bottom: 20px; color: var(--text); }
-    .moving-right li { margin-bottom: 10px; font-size: 17px; color: #1e293b; }
-
-    .services { padding: 80px 20px; }
-
+    .services { padding:80px 20px; }
     .cards {
-      max-width: 1150px;
-      margin: 40px auto 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
+      max-width:1150px; margin:40px auto 0;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:30px;
     }
-
     .card {
-      background: var(--white);
-      padding: 30px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: .3s;
+      background:var(--white); padding:30px; border-radius:16px;
+      text-align:center; box-shadow:var(--shadow); transition:.3s;
     }
+    .card:hover { transform:translateY(-10px) scale(1.02); }
+    .icon { font-size:40px; margin-bottom:15px; }
+    .card h3 { margin-bottom:10px; }
+    .card p { font-size:14px; color:#666; line-height:1.6; }
 
-    .card:hover { transform: translateY(-10px) scale(1.02); }
-
-    .icon { font-size: 40px; margin-bottom: 15px; }
-    .card h3 { margin-bottom: 10px; }
-    .card p { font-size: 14px; color: #666; line-height: 1.6; }
-
-    .catalogo-section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .catalogo-section h1 { font-size: 48px; color: var(--dark); }
-    .catalogo-section p  { margin-top: 10px; color: #475569; }
-
+    /* ===== CATÁLOGO ===== */
+    .catalogo-section { padding:80px 20px; text-align:center; }
+    .catalogo-section h1 { font-size:48px; color:var(--dark); }
+    .catalogo-section p  { margin-top:10px; color:#475569; }
     .catalogo {
-      max-width: 1200px;
-      margin: 50px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      max-width:1200px; margin:50px auto 0;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
     }
-
     .producto {
-      background: var(--white);
-      padding: 20px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      transition: .3s;
+      background:var(--white); padding:20px;
+      border-radius:var(--radius); box-shadow:var(--shadow); transition:.3s;
     }
-
-    .producto:hover { transform: translateY(-10px) scale(1.03); }
-
-    .producto img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-
-    .nombre { margin-top: 15px; font-size: 18px; color: var(--dark); font-weight: 700; }
-    .precio { margin-top: 8px; color: var(--blue); font-weight: bold; font-size: 18px; }
-
+    .producto:hover { transform:translateY(-10px) scale(1.03); }
+    .producto img { width:100%; height:220px; object-fit:cover; border-radius:12px; }
+    .nombre { margin-top:15px; font-size:18px; color:var(--dark); font-weight:700; }
+    .precio { margin-top:8px; color:var(--blue); font-weight:bold; font-size:18px; }
     .btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 10px;
-      background: var(--blue);
-      color: var(--white);
-      cursor: pointer;
-      transition: .3s;
-      font-weight: bold;
+      display:inline-block; margin-top:12px; padding:12px 18px;
+      border:none; border-radius:10px; background:var(--blue);
+      color:var(--white); cursor:pointer; transition:.3s; font-weight:bold;
     }
+    .btn:hover { background:var(--blue-dark); }
 
-    .btn:hover { background: var(--blue-dark); }
-
+    /* ===== ABOUT ===== */
     .about-content {
-      display: flex;
-      gap: 40px;
-      padding: 80px 60px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
+      display:flex; gap:40px; padding:80px 60px;
+      flex-wrap:wrap; justify-content:center; align-items:flex-start;
     }
-
-    .about-text { max-width: 520px; }
-    .about-text h2 { margin-bottom: 20px; font-size: 32px; }
-    .about-text p  { margin-bottom: 15px; line-height: 1.8; color: var(--text); }
-
+    .about-text { max-width:520px; }
+    .about-text h2 { margin-bottom:20px; font-size:32px; }
+    .about-text p  { margin-bottom:15px; line-height:1.8; color:var(--text); }
     .about-box {
-      background: var(--white);
-      padding: 35px;
-      border-radius: var(--radius);
-      width: 320px;
-      box-shadow: var(--shadow);
+      background:var(--white); padding:35px;
+      border-radius:var(--radius); width:320px; box-shadow:var(--shadow);
     }
+    .about-box h3 { margin-bottom:15px; }
+    .about-box li { margin-bottom:12px; color:var(--text); }
+    .mission { padding:0 20px 80px; display:flex; justify-content:center; gap:30px; flex-wrap:wrap; }
 
-    .about-box h3 { margin-bottom: 15px; }
-    .about-box li { margin-bottom: 12px; color: var(--text); }
-
-    .mission {
-      padding: 0 20px 80px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .contact { padding: 90px 20px; }
-    .sub { margin-bottom: 50px !important; }
-
-    .container {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
+    /* ===== CONTACTO ===== */
+    .contact { padding:90px 20px; }
+    .sub { margin-bottom:50px !important; }
+    .container { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:40px; }
     .info {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-      padding: 35px;
-      border-radius: var(--radius);
-      width: 320px;
-      text-align: left;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-      color: #ffffff;
+      background:rgba(255,255,255,0.1); backdrop-filter:blur(12px);
+      padding:35px; border-radius:var(--radius); width:320px;
+      text-align:left; box-shadow:0 20px 50px rgba(0,0,0,0.3); color:#fff;
     }
-
-    .info h3 { margin-bottom: 20px; }
-    .info p  { margin-bottom: 12px; line-height: 1.6; color: #ffffff; }
-
-    .social { margin-top: 20px; }
-    .social span { display: block; margin-bottom: 10px; font-weight: bold; }
-    .social a { display: block; color: var(--blue-soft); margin-top: 6px; font-weight: bold; }
-
+    .info h3 { margin-bottom:20px; }
+    .info p  { margin-bottom:12px; line-height:1.6; color:#fff; }
+    .social { margin-top:20px; }
+    .social span { display:block; margin-bottom:10px; font-weight:bold; }
+    .social a { display:block; color:var(--blue-soft); margin-top:6px; font-weight:bold; }
     .form {
-      background: var(--white);
-      color: #000;
-      padding: 35px;
-      border-radius: var(--radius);
-      width: 340px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-      text-align: left;
+      background:var(--white); color:#000; padding:35px;
+      border-radius:var(--radius); width:340px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.3); text-align:left;
     }
-
-    .form h3 { margin-bottom: 20px; }
-
+    .form h3 { margin-bottom:20px; }
     .form input, .form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      outline: none;
+      width:100%; padding:12px; margin-bottom:12px;
+      border-radius:10px; border:1px solid #cbd5e1; outline:none;
     }
-
-    .form textarea { height: 120px; resize: none; }
-
+    .form textarea { height:120px; resize:none; }
     .form button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: var(--blue);
-      color: var(--white);
-      font-weight: bold;
-      cursor: pointer;
-      transition: .3s;
+      width:100%; padding:14px; border:none; border-radius:12px;
+      background:var(--blue); color:var(--white);
+      font-weight:bold; cursor:pointer; transition:.3s;
     }
-
-    .form button:hover {
-      background: var(--blue-dark);
-      transform: translateY(-3px);
-    }
+    .form button:hover { background:var(--blue-dark); transform:translateY(-3px); }
 
     footer {
-      background: var(--dark-2);
-      color: var(--white);
-      text-align: center;
-      padding: 32px 20px;
-      font-size: 15px;
+      background:var(--dark-2); color:var(--white);
+      text-align:center; padding:32px 20px; font-size:15px;
     }
 
-    @media (max-width: 992px) {
-      header { padding: 18px 24px; }
-      .page-hero h1, .contact h1 { font-size: 42px; }
-      .catalogo { grid-template-columns: repeat(2, 1fr); }
-      .moving-section, .about-content { padding: 60px 24px; }
+    /* ===== OVERLAY GENERAL ===== */
+    .overlay-fondo {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,0.5); backdrop-filter:blur(5px);
+      z-index:5000; animation:fadeIn .2s ease;
+    }
+    .overlay-fondo.activo { display:block; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    /* ===== MODAL CONFIRMAR ===== */
+    .modal-confirmar {
+      display:none; position:fixed; inset:0;
+      z-index:6000; justify-content:center; align-items:center;
+    }
+    .modal-confirmar.activo { display:flex; }
+
+    .modal-card {
+      background:var(--white); border-radius:24px;
+      width:340px; max-width:92vw;
+      box-shadow:0 40px 100px rgba(0,0,0,0.35);
+      overflow:hidden;
+      animation:slideUp .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes slideUp {
+      from { transform:translateY(40px) scale(.95); opacity:0; }
+      to   { transform:translateY(0)    scale(1);   opacity:1; }
     }
 
-    @media (max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; }
-      nav { gap: 14px; }
-      .hero, .page-hero, .contact, .catalogo-section { padding: 70px 20px; }
-      .page-hero h1, .catalogo-section h1, .contact h1 { font-size: 34px; }
-      .hero-slogan { font-size: 22px; }
-      .hero-logo { width: 140px; height: 140px; }
-      .moving-text { font-size: 20px; gap: 30px; }
-      .moving-right h2 { font-size: 28px; }
-      .catalogo { grid-template-columns: 1fr; }
-      .registro-card, .form, .info { width: 100%; max-width: 360px; }
+    .modal-img-wrap {
+      width:100%; height:200px; overflow:hidden; position:relative;
+    }
+    .modal-img-wrap img {
+      width:100%; height:100%; object-fit:cover;
+    }
+    .modal-img-wrap::after {
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.4), transparent);
+    }
+
+    .modal-body { padding:24px; }
+    .modal-body h3 { font-size:20px; font-weight:800; margin-bottom:4px; }
+    .modal-body .m-precio { color:var(--blue); font-weight:700; font-size:17px; margin-bottom:14px; }
+    .modal-body p { color:var(--text); font-size:14px; margin-bottom:22px; line-height:1.6; }
+
+    .modal-acciones { display:flex; gap:10px; }
+    .modal-acciones button {
+      flex:1; padding:13px; border:none; border-radius:14px;
+      font-weight:700; font-size:14px; cursor:pointer; transition:.25s;
+    }
+    .btn-confirmar {
+      background:var(--blue); color:#fff;
+    }
+    .btn-confirmar:hover { background:var(--blue-dark); transform:translateY(-2px); }
+    .btn-cancelar {
+      background:#f1f5f9; color:var(--dark);
+    }
+    .btn-cancelar:hover { background:#e2e8f0; }
+
+    /* ===== PANEL CARRITO ===== */
+    /* No divide la pantalla: es un card flotante centrado */
+    .carrito-panel {
+      display:none; position:fixed;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%) scale(.9);
+      width:420px; max-width:95vw;
+      max-height:85vh;
+      background:var(--white);
+      border-radius:28px;
+      box-shadow:0 40px 100px rgba(0,0,0,0.35);
+      z-index:6000;
+      flex-direction:column;
+      overflow:hidden;
+      transition:transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      opacity:0;
+    }
+    .carrito-panel.abierto {
+      display:flex;
+      transform:translate(-50%,-50%) scale(1);
+      opacity:1;
+      animation:cartPop .35s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes cartPop {
+      from { transform:translate(-50%,-50%) scale(.88); opacity:0; }
+      to   { transform:translate(-50%,-50%) scale(1);   opacity:1; }
+    }
+
+    .carrito-head {
+      padding:22px 24px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid #f1f5f9;
+    }
+    .carrito-head-left { display:flex; align-items:center; gap:10px; }
+    .carrito-head-left h2 { font-size:20px; font-weight:800; }
+    .carrito-head-left .items-count {
+      background:var(--blue); color:#fff;
+      font-size:12px; font-weight:700;
+      padding:2px 8px; border-radius:50px;
+    }
+
+    .btn-cerrar-carrito {
+      width:34px; height:34px; border-radius:50%;
+      border:none; background:#f1f5f9; cursor:pointer;
+      font-size:16px; color:var(--muted);
+      display:flex; align-items:center; justify-content:center;
+      transition:.2s; flex-shrink:0;
+    }
+    .btn-cerrar-carrito:hover { background:#e2e8f0; color:var(--dark); transform:scale(1.1); }
+
+    .carrito-lista {
+      flex:1; overflow-y:auto; padding:16px 24px;
+    }
+    .carrito-lista::-webkit-scrollbar { width:4px; }
+    .carrito-lista::-webkit-scrollbar-thumb { background:#e2e8f0; border-radius:4px; }
+
+    .carrito-vacio {
+      text-align:center; padding:50px 20px; color:var(--muted);
+    }
+    .carrito-vacio .v-icon { font-size:52px; margin-bottom:12px; }
+    .carrito-vacio p { font-size:15px; }
+
+    .ci {
+      display:flex; align-items:center; gap:14px;
+      padding:14px 0; border-bottom:1px solid #f8fafc;
+    }
+    .ci:last-child { border-bottom:none; }
+    .ci img {
+      width:60px; height:60px; border-radius:12px;
+      object-fit:cover; flex-shrink:0;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+    .ci-data { flex:1; min-width:0; }
+    .ci-data .ci-nom {
+      font-weight:700; font-size:14px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .ci-data .ci-sub {
+      color:var(--muted); font-size:12px; margin-top:2px;
+    }
+    .ci-data .ci-sub span { color:var(--blue); font-weight:700; }
+
+    .ci-controles { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+    .c-btn {
+      width:28px; height:28px; border-radius:8px;
+      border:1px solid #e2e8f0; background:#fff;
+      font-size:14px; font-weight:700; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark); transition:.2s;
+    }
+    .c-btn:hover { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .c-cant { font-size:14px; font-weight:700; min-width:18px; text-align:center; }
+    .c-del {
+      background:none; border:none; cursor:pointer;
+      font-size:16px; color:#cbd5e1; transition:.2s; margin-left:4px;
+    }
+    .c-del:hover { color:#ef4444; transform:scale(1.2); }
+
+    .carrito-pie {
+      padding:18px 24px 22px;
+      border-top:1px solid #f1f5f9;
+      background:#fafafa;
+    }
+    .total-row {
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:16px;
+    }
+    .total-row .total-label { font-size:15px; color:var(--muted); }
+    .total-row .total-num { font-size:24px; font-weight:900; color:var(--dark); }
+    .total-row .total-num span { color:var(--blue); }
+
+    .btn-pedido {
+      width:100%; padding:15px; border:none; border-radius:16px;
+      background:linear-gradient(135deg,var(--blue),#1e40af);
+      color:#fff; font-size:15px; font-weight:700;
+      cursor:pointer; transition:.3s;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      box-shadow:0 8px 24px rgba(37,99,235,0.35);
+    }
+    .btn-pedido:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(37,99,235,0.45); }
+
+    .btn-vaciar {
+      width:100%; padding:10px; border:none; background:none;
+      color:#cbd5e1; font-size:12px; cursor:pointer;
+      margin-top:8px; transition:.2s; border-radius:10px;
+    }
+    .btn-vaciar:hover { color:#ef4444; background:#fff5f5; }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position:fixed; bottom:28px; left:50%;
+      transform:translateX(-50%) translateY(60px);
+      background:var(--dark); color:#fff;
+      padding:12px 22px; border-radius:50px;
+      font-size:13px; font-weight:600;
+      z-index:9000; transition:transform .4s cubic-bezier(.4,0,.2,1);
+      white-space:nowrap; pointer-events:none;
+      box-shadow:0 8px 24px rgba(0,0,0,0.25);
+    }
+    .toast.visible { transform:translateX(-50%) translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:992px) {
+      header { padding:18px 24px; }
+      .page-hero h1, .contact h1 { font-size:42px; }
+      .catalogo { grid-template-columns:repeat(2,1fr); }
+      .moving-section, .about-content { padding:60px 24px; }
+    }
+    @media (max-width:768px) {
+      header { flex-direction:column; align-items:flex-start; }
+      nav { gap:14px; }
+      .hero,.page-hero,.contact,.catalogo-section { padding:70px 20px; }
+      .page-hero h1,.catalogo-section h1,.contact h1 { font-size:34px; }
+      .hero-slogan { font-size:22px; }
+      .hero-logo { width:140px; height:140px; }
+      .moving-text { font-size:20px; gap:30px; }
+      .moving-right h2 { font-size:28px; }
+      .catalogo { grid-template-columns:1fr; }
+      .registro-card,.form,.info { width:100%; max-width:360px; }
+      .carrito-panel { width:96vw; max-height:90vh; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== PANTALLA DE REGISTRO ===== -->
+  <!-- ===== REGISTRO ===== -->
   <div id="registro">
     <div class="registro-card">
       <div class="logo-registro-svg">IP</div>
@@ -471,7 +481,7 @@
     </div>
   </div>
 
-  <!-- ===== PORTAL PRINCIPAL ===== -->
+  <!-- ===== PORTAL ===== -->
   <div id="portal">
     <header>
       <h2 class="brand">InnovaPrint</h2>
@@ -481,48 +491,37 @@
         <a href="#catalogo">Catálogo</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#contacto">Contacto</a>
+        <!-- Botón carrito: oculto hasta que se añada un producto -->
+        <button id="nav-carrito-btn" onclick="abrirCarrito()">
+          🛒 Carrito
+          <span class="carrito-badge" id="badge">0</span>
+        </button>
         <a href="#" onclick="cerrarSesion(event)">Salir</a>
       </nav>
     </header>
 
     <main>
 
-      <!-- ===== HERO ===== -->
       <section class="hero" id="inicio">
-        <img
-          src="https://i.postimg.cc/MHDRSFfn/Whats-App-Image-2026-04-02-at-11-26-31-PM.jpg"
-          alt="InnovaPrint Logo"
-          class="hero-logo"
-        >
+        <img src="https://i.postimg.cc/MHDRSFfn/Whats-App-Image-2026-04-02-at-11-26-31-PM.jpg" alt="InnovaPrint Logo" class="hero-logo">
         <p class="hero-slogan">"Donde Tus Ideas Se Convierten En Estilo"</p>
       </section>
 
-      <!-- ===== TEXTO EN MOVIMIENTO ===== -->
       <section class="moving-section">
         <div class="moving-left">
           <div class="moving-wrapper">
             <div class="moving-text">
-              <span>Diseño de Logos</span>
-              <span>Ropa Personalizada</span>
-              <span>Impresión Publicitaria</span>
-              <span>Artículos Promocionales</span>
-              <span>Packaging Creativo</span>
-              <span>Diseño de Logos</span>
-              <span>Ropa Personalizada</span>
-              <span>Impresión Publicitaria</span>
-              <span>Artículos Promocionales</span>
-              <span>Packaging Creativo</span>
+              <span>Diseño de Logos</span><span>Ropa Personalizada</span>
+              <span>Impresión Publicitaria</span><span>Artículos Promocionales</span>
+              <span>Packaging Creativo</span><span>Diseño de Logos</span>
+              <span>Ropa Personalizada</span><span>Impresión Publicitaria</span>
+              <span>Artículos Promocionales</span><span>Packaging Creativo</span>
             </div>
           </div>
         </div>
-
         <div class="moving-right">
           <h2>¿En qué podemos ayudarte?</h2>
-          <p>
-            En InnovaPrint convertimos tus ideas en productos reales.
-            Diseñamos, imprimimos y entregamos con calidad profesional
-            para que tu marca destaque.
-          </p>
+          <p>En InnovaPrint convertimos tus ideas en productos reales. Diseñamos, imprimimos y entregamos con calidad profesional para que tu marca destaque.</p>
           <ul>
             <li>✔ Diseños exclusivos</li>
             <li>✔ Materiales premium</li>
@@ -532,132 +531,104 @@
         </div>
       </section>
 
-      <!-- ===== SERVICIOS ===== -->
       <section class="services" id="servicios">
         <h2 class="section-title">Nuestros Servicios</h2>
         <div class="cards">
-          <div class="card">
-            <div class="icon">💡</div>
-            <h3>Ideación y Estructura</h3>
-            <p>Aterrizamos tu idea y creamos una base sólida para tu negocio.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🎯</div>
-            <h3>Branding e Identidad</h3>
-            <p>Diseñamos una imagen profesional que destaque tu marca.</p>
-          </div>
-          <div class="card">
-            <div class="icon">📊</div>
-            <h3>Planificación Financiera</h3>
-            <p>Estrategias para asegurar estabilidad y crecimiento.</p>
-          </div>
-          <div class="card">
-            <div class="icon">📱</div>
-            <h3>Marketing Digital</h3>
-            <p>Campañas que atraen clientes y hacen crecer tu negocio.</p>
-          </div>
-          <div class="card">
-            <div class="icon">⚖️</div>
-            <h3>Asesoría Legal</h3>
-            <p>Te ayudamos con todos los procesos legales.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🤝</div>
-            <h3>Mentoría Continua</h3>
-            <p>Acompañamiento constante para escalar tu negocio.</p>
-          </div>
+          <div class="card"><div class="icon">💡</div><h3>Ideación y Estructura</h3><p>Aterrizamos tu idea y creamos una base sólida para tu negocio.</p></div>
+          <div class="card"><div class="icon">🎯</div><h3>Branding e Identidad</h3><p>Diseñamos una imagen profesional que destaque tu marca.</p></div>
+          <div class="card"><div class="icon">📊</div><h3>Planificación Financiera</h3><p>Estrategias para asegurar estabilidad y crecimiento.</p></div>
+          <div class="card"><div class="icon">📱</div><h3>Marketing Digital</h3><p>Campañas que atraen clientes y hacen crecer tu negocio.</p></div>
+          <div class="card"><div class="icon">⚖️</div><h3>Asesoría Legal</h3><p>Te ayudamos con todos los procesos legales.</p></div>
+          <div class="card"><div class="icon">🤝</div><h3>Mentoría Continua</h3><p>Acompañamiento constante para escalar tu negocio.</p></div>
         </div>
       </section>
 
-      <!-- ===== CATÁLOGO ===== -->
       <section class="catalogo-section" id="catalogo">
         <h1>Catálogo</h1>
         <p>Productos personalizados con calidad profesional.</p>
-
         <div class="catalogo">
+
           <div class="producto">
-            <img src="https://i.postimg.cc/66PnYWQz/Whats-App-Image-2026-03-27-at-8-23-26-PM.jpg" alt="Aretes personalizados">
-            <div class="nombre">Aretes</div>
-            <div class="precio">$20</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/66PnYWQz/Whats-App-Image-2026-03-27-at-8-23-26-PM.jpg" alt="Aretes">
+            <div class="nombre">Aretes</div><div class="precio">$20</div>
+            <button class="btn" onclick="abrirModal('Aretes','$20','https://i.postimg.cc/66PnYWQz/Whats-App-Image-2026-03-27-at-8-23-26-PM.jpg',20)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/K82NDG9f/Whats-App-Image-2026-03-27-at-8-23-25-PM.jpg" alt="Sudaderas personalizadas">
-            <div class="nombre">Sudaderas</div>
-            <div class="precio">$15</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/K82NDG9f/Whats-App-Image-2026-03-27-at-8-23-25-PM.jpg" alt="Sudaderas">
+            <div class="nombre">Sudaderas</div><div class="precio">$15</div>
+            <button class="btn" onclick="abrirModal('Sudaderas','$15','https://i.postimg.cc/K82NDG9f/Whats-App-Image-2026-03-27-at-8-23-25-PM.jpg',15)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/XqS1CwtB/Whats-App-Image-2026-04-02-at-12-36-39-PM.jpg" alt="Gorra bordada">
-            <div class="nombre">Gorra Bordada</div>
-            <div class="precio">$18</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/XqS1CwtB/Whats-App-Image-2026-04-02-at-12-36-39-PM.jpg" alt="Gorra Bordada">
+            <div class="nombre">Gorra Bordada</div><div class="precio">$18</div>
+            <button class="btn" onclick="abrirModal('Gorra Bordada','$18','https://i.postimg.cc/XqS1CwtB/Whats-App-Image-2026-04-02-at-12-36-39-PM.jpg',18)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/Nj9Gst87/Gemini-Generated-Image-yez8jpyez8jpyez8.png" alt="Poloches personalizados">
-            <div class="nombre">Poloches</div>
-            <div class="precio">$10</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/Nj9Gst87/Gemini-Generated-Image-yez8jpyez8jpyez8.png" alt="Poloches">
+            <div class="nombre">Poloches</div><div class="precio">$10</div>
+            <button class="btn" onclick="abrirModal('Poloches','$10','https://i.postimg.cc/Nj9Gst87/Gemini-Generated-Image-yez8jpyez8jpyez8.png',10)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/GpR5tJwC/Gemini-Generated-Image-9jy5kh9jy5kh9jy5.png" alt="Camiseta blanca personalizada">
-            <div class="nombre">Camiseta blanca</div>
-            <div class="precio">$30</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/GpR5tJwC/Gemini-Generated-Image-9jy5kh9jy5kh9jy5.png" alt="Camiseta blanca">
+            <div class="nombre">Camiseta blanca</div><div class="precio">$30</div>
+            <button class="btn" onclick="abrirModal('Camiseta blanca','$30','https://i.postimg.cc/GpR5tJwC/Gemini-Generated-Image-9jy5kh9jy5kh9jy5.png',30)">Comprar</button>
           </div>
+
           <div class="producto">
             <img src="https://i.postimg.cc/HLgqq161/Gemini-Generated-Image-mpzo39mpzo39mpzo.png" alt="Conjunto de accesorios">
-            <div class="nombre">Conjunto de accesorios</div>
-            <div class="precio">$25</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <div class="nombre">Conjunto de accesorios</div><div class="precio">$25</div>
+            <button class="btn" onclick="abrirModal('Conjunto de accesorios','$25','https://i.postimg.cc/HLgqq161/Gemini-Generated-Image-mpzo39mpzo39mpzo.png',25)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/MH3xw3vV/Gemini-Generated-Image-5z7ghk5z7ghk5z7g.png" alt="Pantalones personalizados">
-            <div class="nombre">Pantalones</div>
-            <div class="precio">$40</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/MH3xw3vV/Gemini-Generated-Image-5z7ghk5z7ghk5z7g.png" alt="Pantalones">
+            <div class="nombre">Pantalones</div><div class="precio">$40</div>
+            <button class="btn" onclick="abrirModal('Pantalones','$40','https://i.postimg.cc/MH3xw3vV/Gemini-Generated-Image-5z7ghk5z7ghk5z7g.png',40)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/J4b30w17/Whats-App-Image-2026-03-27-at-8-23-25-PM-(1).jpg" alt="Cadena personalizada">
-            <div class="nombre">Cadena</div>
-            <div class="precio">$22</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/J4b30w17/Whats-App-Image-2026-03-27-at-8-23-25-PM-(1).jpg" alt="Cadena">
+            <div class="nombre">Cadena</div><div class="precio">$22</div>
+            <button class="btn" onclick="abrirModal('Cadena','$22','https://i.postimg.cc/J4b30w17/Whats-App-Image-2026-03-27-at-8-23-25-PM-(1).jpg',22)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/fWdqcrwP/Gemini-Generated-Image-cv8moicv8moicv8m.png" alt="Llavero personalizado">
-            <div class="nombre">Llavero Personalizado</div>
-            <div class="precio">$8</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/fWdqcrwP/Gemini-Generated-Image-cv8moicv8moicv8m.png" alt="Llavero">
+            <div class="nombre">Llavero Personalizado</div><div class="precio">$8</div>
+            <button class="btn" onclick="abrirModal('Llavero Personalizado','$8','https://i.postimg.cc/fWdqcrwP/Gemini-Generated-Image-cv8moicv8moicv8m.png',8)">Comprar</button>
           </div>
-          <!-- ===== NUEVOS PRODUCTOS ===== -->
+
           <div class="producto">
-            <img src="https://i.postimg.cc/25p0Bcmt/Whats-App-Image-2026-04-03-at-12-02-45-AM-(1).jpg" alt="Logo personalizado">
-            <div class="nombre">Logo</div>
-            <div class="precio">$30</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/25p0Bcmt/Whats-App-Image-2026-04-03-at-12-02-45-AM-(1).jpg" alt="Logo">
+            <div class="nombre">Logo</div><div class="precio">$30</div>
+            <button class="btn" onclick="abrirModal('Logo','$30','https://i.postimg.cc/25p0Bcmt/Whats-App-Image-2026-04-03-at-12-02-45-AM-(1).jpg',30)">Comprar</button>
           </div>
+
           <div class="producto">
             <img src="https://i.postimg.cc/sXj9pbLJ/Whats-App-Image-2026-04-03-at-12-02-45-AM.jpg" alt="Pantalón Jogger">
-            <div class="nombre">Pantalón Jogger</div>
-            <div class="precio">$24</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <div class="nombre">Pantalón Jogger</div><div class="precio">$24</div>
+            <button class="btn" onclick="abrirModal('Pantalón Jogger','$24','https://i.postimg.cc/sXj9pbLJ/Whats-App-Image-2026-04-03-at-12-02-45-AM.jpg',24)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/qBZX3bxg/Whats-App-Image-2026-04-03-at-12-03-21-AM.jpg" alt="Taza personalizada">
-            <div class="nombre">Taza Personalizada</div>
-            <div class="precio">$17</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/qBZX3bxg/Whats-App-Image-2026-04-03-at-12-03-21-AM.jpg" alt="Taza Personalizada">
+            <div class="nombre">Taza Personalizada</div><div class="precio">$17</div>
+            <button class="btn" onclick="abrirModal('Taza Personalizada','$17','https://i.postimg.cc/qBZX3bxg/Whats-App-Image-2026-04-03-at-12-03-21-AM.jpg',17)">Comprar</button>
           </div>
+
           <div class="producto">
-            <img src="https://i.postimg.cc/WtLd7k3V/Whats-App-Image-2026-04-03-at-12-03-05-AM.jpg" alt="Bolsas personalizadas">
-            <div class="nombre">Bolsas</div>
-            <div class="precio">$4</div>
-            <a class="btn" href="#contacto">Comprar</a>
+            <img src="https://i.postimg.cc/WtLd7k3V/Whats-App-Image-2026-04-03-at-12-03-05-AM.jpg" alt="Bolsas">
+            <div class="nombre">Bolsas</div><div class="precio">$4</div>
+            <button class="btn" onclick="abrirModal('Bolsas','$4','https://i.postimg.cc/WtLd7k3V/Whats-App-Image-2026-04-03-at-12-03-05-AM.jpg',4)">Comprar</button>
           </div>
+
         </div>
       </section>
 
-      <!-- ===== NOSOTROS ===== -->
       <section class="page-hero" id="nosotros">
         <h1>Sobre Nosotros</h1>
         <p>Conoce quiénes somos y por qué InnovaPrint es tu mejor aliado creativo.</p>
@@ -666,22 +637,9 @@
       <section class="about-content">
         <div class="about-text">
           <h2>Nuestra Historia</h2>
-          <p>
-            InnovaPrint surgió en 2026, con una simple idea de un grupo de jóvenes:
-            "Convertir las ideas de las personas en diseños únicos y espectaculares".
-            Este grupo de jóvenes creativos, imaginativos e impresionantes, empezaron
-            creando diseños básicos pero súper llamativos, para tazas y camisetas sin
-            imaginar que marcarían recuerdos importantes en las memorias de algunas personas.
-          </p>
-          <p>
-            Con el tiempo, lo que era una simple idea se convirtió en algo transformador.
-            Cada pedido que llegaba marcaba una historia diferente: Regalos, Sorpresa,
-            Recuerdos, Cumpleaños… y así nos convertimos en una tienda de confiabilidad
-            y satisfacción, con el propósito de que las personas puedan expresar sus
-            emociones o recordar algo a través de productos personalizados (diseños).
-          </p>
+          <p>InnovaPrint surgió en 2026, con una simple idea de un grupo de jóvenes: "Convertir las ideas de las personas en diseños únicos y espectaculares". Este grupo de jóvenes creativos, imaginativos e impresionantes, empezaron creando diseños básicos pero súper llamativos, para tazas y camisetas sin imaginar que marcarían recuerdos importantes en las memorias de algunas personas.</p>
+          <p>Con el tiempo, lo que era una simple idea se convirtió en algo transformador. Cada pedido que llegaba marcaba una historia diferente: Regalos, Sorpresa, Recuerdos, Cumpleaños… y así nos convertimos en una tienda de confiabilidad y satisfacción, con el propósito de que las personas puedan expresar sus emociones o recordar algo a través de productos personalizados (diseños).</p>
         </div>
-
         <div class="about-box">
           <h3>¿Por qué elegirnos?</h3>
           <ul>
@@ -695,25 +653,14 @@
       </section>
 
       <section class="mission">
-        <div class="card">
-          <h3>Misión</h3>
-          <p>Brindar soluciones de impresión y diseño que impulsen la identidad y el crecimiento de nuestros clientes.</p>
-        </div>
-        <div class="card">
-          <h3>Visión</h3>
-          <p>Convertirnos en una empresa líder en servicios creativos y de impresión a nivel nacional.</p>
-        </div>
-        <div class="card">
-          <h3>Valores</h3>
-          <p>Calidad, Responsabilidad, Innovación, Gratitud, Creatividad y Compromiso por cada producto.</p>
-        </div>
+        <div class="card"><h3>Misión</h3><p>Brindar soluciones de impresión y diseño que impulsen la identidad y el crecimiento de nuestros clientes.</p></div>
+        <div class="card"><h3>Visión</h3><p>Convertirnos en una empresa líder en servicios creativos y de impresión a nivel nacional.</p></div>
+        <div class="card"><h3>Valores</h3><p>Calidad, Responsabilidad, Innovación, Gratitud, Creatividad y Compromiso por cada producto.</p></div>
       </section>
 
-      <!-- ===== CONTACTO ===== -->
       <section class="contact" id="contacto">
         <h1>Contáctanos</h1>
         <p class="sub">¿Tienes una idea o proyecto? Escríbenos y lo hacemos realidad.</p>
-
         <div class="container">
           <div class="info">
             <h3>Información</h3>
@@ -728,7 +675,6 @@
               <a href="#">WhatsApp</a>
             </div>
           </div>
-
           <div class="form">
             <h3>Envíanos un mensaje</h3>
             <form action="https://formsubmit.co/marvinhernandez0828@gmail.com" method="POST">
@@ -744,13 +690,59 @@
       </section>
 
     </main>
-
-    <footer>
-      © 2026 InnovaPrint — Todos los derechos reservados
-    </footer>
+    <footer>© 2026 InnovaPrint — Todos los derechos reservados</footer>
   </div>
 
+  <!-- ===== OVERLAY FONDO ===== -->
+  <div class="overlay-fondo" id="overlay" onclick="cerrarTodo()"></div>
+
+  <!-- ===== MODAL CONFIRMAR ===== -->
+  <div class="modal-confirmar" id="modal">
+    <div class="modal-card">
+      <div class="modal-img-wrap">
+        <img id="m-img" src="" alt="">
+      </div>
+      <div class="modal-body">
+        <h3 id="m-nombre"></h3>
+        <div class="m-precio" id="m-precio"></div>
+        <p>¿Quieres añadir este producto a tu carrito?</p>
+        <div class="modal-acciones">
+          <button class="btn-confirmar" onclick="agregarAlCarrito()">Añadir al carrito</button>
+          <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PANEL CARRITO (card flotante centrado) ===== -->
+  <div class="carrito-panel" id="carrito-panel">
+    <div class="carrito-head">
+      <div class="carrito-head-left">
+        <h2>Mi carrito</h2>
+        <span class="items-count" id="items-count">0</span>
+      </div>
+      <button class="btn-cerrar-carrito" onclick="cerrarCarrito()">✕</button>
+    </div>
+
+    <div class="carrito-lista" id="carrito-lista"></div>
+
+    <div class="carrito-pie">
+      <div class="total-row">
+        <span class="total-label">Total estimado</span>
+        <span class="total-num">$<span id="total-num">0</span></span>
+      </div>
+      <button class="btn-pedido" onclick="hacerPedido()">
+        💬 Pedir por WhatsApp
+      </button>
+      <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
   <script>
+    /* ===== SESIÓN ===== */
     window.onload = function () {
       if (localStorage.getItem("usuario")) {
         document.getElementById("registro").style.display = "none";
@@ -762,7 +754,6 @@
       event.preventDefault();
       const usuario = document.getElementById("usuario").value.trim();
       const clave   = document.getElementById("clave").value.trim();
-
       if (usuario && clave) {
         localStorage.setItem("usuario", usuario);
         document.getElementById("registro").style.display = "none";
@@ -778,6 +769,132 @@
       localStorage.removeItem("usuario");
       document.getElementById("portal").style.display = "none";
       document.getElementById("registro").style.display = "flex";
+    }
+
+    /* ===== CARRITO ===== */
+    let carrito = [];
+    let productoActual = null;
+
+    /* -- Modal de confirmación -- */
+    function abrirModal(nombre, precio, img, num) {
+      productoActual = { nombre, precio, img, num };
+      document.getElementById("m-img").src = img;
+      document.getElementById("m-nombre").textContent = nombre;
+      document.getElementById("m-precio").textContent = precio;
+      document.getElementById("modal").classList.add("activo");
+      document.getElementById("overlay").classList.add("activo");
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").classList.remove("activo");
+      document.getElementById("overlay").classList.remove("activo");
+      productoActual = null;
+    }
+
+    function agregarAlCarrito() {
+      if (!productoActual) return;
+      const existe = carrito.find(i => i.nombre === productoActual.nombre);
+      if (existe) {
+        existe.cantidad++;
+      } else {
+        carrito.push({ ...productoActual, cantidad: 1 });
+      }
+      cerrarModal();
+      actualizarUI();
+      toast("✅ " + productoActual.nombre + " añadido");
+    }
+
+    /* -- Panel carrito -- */
+    function abrirCarrito() {
+      renderLista();
+      document.getElementById("carrito-panel").classList.add("abierto");
+      document.getElementById("overlay").classList.add("activo");
+    }
+
+    function cerrarCarrito() {
+      document.getElementById("carrito-panel").classList.remove("abierto");
+      document.getElementById("overlay").classList.remove("activo");
+    }
+
+    function cerrarTodo() {
+      cerrarModal();
+      cerrarCarrito();
+    }
+
+    function cambiarCantidad(idx, delta) {
+      carrito[idx].cantidad += delta;
+      if (carrito[idx].cantidad <= 0) carrito.splice(idx, 1);
+      actualizarUI();
+      renderLista();
+    }
+
+    function eliminar(idx) {
+      carrito.splice(idx, 1);
+      actualizarUI();
+      renderLista();
+    }
+
+    function vaciarCarrito() {
+      carrito = [];
+      actualizarUI();
+      renderLista();
+      toast("🗑 Carrito vaciado");
+    }
+
+    function renderLista() {
+      const lista = document.getElementById("carrito-lista");
+      if (carrito.length === 0) {
+        lista.innerHTML = `<div class="carrito-vacio"><div class="v-icon">🛍️</div><p>Tu carrito está vacío.<br>¡Elige un producto del catálogo!</p></div>`;
+        return;
+      }
+      lista.innerHTML = carrito.map((item, i) => `
+        <div class="ci">
+          <img src="${item.img}" alt="${item.nombre}">
+          <div class="ci-data">
+            <div class="ci-nom">${item.nombre}</div>
+            <div class="ci-sub">${item.precio} × ${item.cantidad} = <span>$${item.num * item.cantidad}</span></div>
+          </div>
+          <div class="ci-controles">
+            <button class="c-btn" onclick="cambiarCantidad(${i},-1)">−</button>
+            <span class="c-cant">${item.cantidad}</span>
+            <button class="c-btn" onclick="cambiarCantidad(${i},1)">+</button>
+            <button class="c-del" onclick="eliminar(${i})">🗑</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function actualizarUI() {
+      const total = carrito.reduce((s, i) => s + i.num * i.cantidad, 0);
+      const totalItems = carrito.reduce((s, i) => s + i.cantidad, 0);
+
+      document.getElementById("total-num").textContent = total;
+      document.getElementById("items-count").textContent = totalItems;
+      document.getElementById("badge").textContent = totalItems;
+
+      /* Botón carrito en nav: solo visible si hay productos */
+      const btn = document.getElementById("nav-carrito-btn");
+      btn.style.display = totalItems > 0 ? "flex" : "none";
+
+      /* Si el carrito queda vacío y el panel está abierto, cerrarlo */
+      if (totalItems === 0) cerrarCarrito();
+    }
+
+    function hacerPedido() {
+      const total = carrito.reduce((s, i) => s + i.num * i.cantidad, 0);
+      const lista = carrito.map(i => `• ${i.nombre} x${i.cantidad} ($${i.num * i.cantidad})`).join("\n");
+      const msg = encodeURIComponent(`Hola InnovaPrint! 👋\nMe gustaría hacer este pedido:\n\n${lista}\n\n💰 Total: $${total}`);
+      window.open("https://wa.me/18090000000?text=" + msg, "_blank");
+    }
+
+    /* ===== TOAST ===== */
+    let toastTmr;
+    function toast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("visible");
+      clearTimeout(toastTmr);
+      toastTmr = setTimeout(() => t.classList.remove("visible"), 2600);
     }
   </script>
 
