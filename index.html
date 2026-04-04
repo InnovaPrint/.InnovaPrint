@@ -27,6 +27,9 @@
     a { text-decoration:none; }
     ul { list-style:none; }
     #portal { display:none; }
+    #registro { display:flex; }
+    #registro.oculto { display:none !important; }
+    #portal.visible { display:block !important; }
 
     /* ===== REGISTRO ===== */
     #registro {
@@ -760,11 +763,21 @@
   <div class="toast" id="toast"></div>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
     /* ===== SESIÓN ===== */
+    function mostrarPortal() {
+      document.getElementById("registro").classList.add("oculto");
+      document.getElementById("portal").classList.add("visible");
+    }
+
+    function mostrarRegistro() {
+      document.getElementById("registro").classList.remove("oculto");
+      document.getElementById("portal").classList.remove("visible");
+    }
+
     window.onload = function () {
       if (localStorage.getItem("usuario")) {
-        document.getElementById("registro").style.display = "none";
-        document.getElementById("portal").style.display = "block";
+        mostrarPortal();
       }
     };
 
@@ -773,7 +786,7 @@
       const clave   = document.getElementById("clave").value.trim();
       if (usuario && clave) {
         localStorage.setItem("usuario", usuario);
-        window.location.href = window.location.pathname;
+        mostrarPortal();
       } else {
         alert("Completa los campos");
       }
@@ -782,8 +795,7 @@
     function cerrarSesion(event) {
       if (event) event.preventDefault();
       localStorage.removeItem("usuario");
-      document.getElementById("portal").style.display = "none";
-      document.getElementById("registro").style.display = "flex";
+      mostrarRegistro();
     }
 
     /* ===== CARRITO ===== */
