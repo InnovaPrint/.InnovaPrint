@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InnovaPrint</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -20,7 +21,7 @@
       --radius: 18px;
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     html { scroll-behavior:smooth; }
     body { background:var(--bg); color:var(--dark); }
     img { max-width:100%; display:block; }
@@ -45,15 +46,17 @@
       background:linear-gradient(135deg,#2563eb,#0f172a);
       font-size:32px; font-weight:900; color:#fff; letter-spacing:-2px;
     }
-    .registro-card h2 { margin-bottom:20px; }
+    .registro-card h2 { margin-bottom:20px; font-weight:700; font-size:22px; }
     .registro-card input {
       width:100%; padding:12px; margin:8px 0;
       border-radius:10px; border:1px solid #cbd5e1; outline:none;
+      font-family:'Poppins',sans-serif;
     }
     .registro-card button {
       width:100%; padding:12px; margin-top:15px; border:none;
       border-radius:12px; background:var(--blue); color:var(--white);
-      font-weight:bold; cursor:pointer; transition:.3s;
+      font-weight:700; cursor:pointer; transition:.3s; font-family:'Poppins',sans-serif;
+      font-size:15px; letter-spacing:1px;
     }
     .registro-card button:hover { transform:translateY(-3px); background:var(--blue-dark); }
 
@@ -64,26 +67,60 @@
     /* ===== HEADER ===== */
     header {
       position:sticky; top:0;
-      background:rgba(15,23,42,0.92); backdrop-filter:blur(10px);
+      background:rgba(15,23,42,0.95); backdrop-filter:blur(10px);
       color:var(--white); padding:18px 60px;
       display:flex; justify-content:space-between; align-items:center; gap:20px;
       box-shadow:0 5px 20px rgba(0,0,0,0.25); z-index:1000;
     }
-    .brand { font-size:28px; font-weight:700; }
-    nav { display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
-    nav a { color:var(--white); font-weight:bold; position:relative; transition:.3s; }
-    nav a::after {
-      content:""; position:absolute; left:0; bottom:-6px;
-      width:0; height:2px; background:var(--blue-soft); transition:.3s;
-    }
-    nav a:hover { color:var(--blue-soft); }
-    nav a:hover::after { width:100%; }
+    .brand { font-size:28px; font-weight:900; letter-spacing:-1px; }
 
+    /* ===== MENÚ EN CASCADA ===== */
+    nav { display:flex; flex-wrap:wrap; gap:6px; align-items:center; position:relative; }
+
+    /* Botón principal "Inicio" que despliega el menú */
+    .nav-toggle {
+      color:var(--white); font-weight:700; font-size:15px;
+      background:var(--blue); padding:9px 22px; border-radius:50px;
+      cursor:pointer; border:none; font-family:'Poppins',sans-serif;
+      display:flex; align-items:center; gap:6px; transition:.3s;
+      position:relative;
+    }
+    .nav-toggle:hover { background:var(--blue-dark); }
+    .nav-toggle::after { content:"▾"; font-size:12px; }
+
+    /* Menú desplegable */
+    .nav-dropdown {
+      position:absolute; top:calc(100% + 10px); left:0;
+      background:rgba(15,23,42,0.98); border-radius:14px;
+      padding:10px 0; min-width:180px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.4);
+      opacity:0; pointer-events:none;
+      transform:translateY(-10px);
+      transition:opacity .25s ease, transform .25s ease;
+      z-index:999;
+    }
+    .nav-wrapper:hover .nav-dropdown,
+    .nav-wrapper:focus-within .nav-dropdown {
+      opacity:1; pointer-events:all; transform:translateY(0);
+    }
+    .nav-wrapper { position:relative; }
+
+    .nav-dropdown a {
+      display:block; padding:10px 22px;
+      color:#e2e8f0; font-weight:600; font-size:14px;
+      transition:.2s; border-left:3px solid transparent;
+    }
+    .nav-dropdown a:hover {
+      color:var(--blue-soft); background:rgba(255,255,255,0.05);
+      border-left-color:var(--blue-soft);
+    }
+
+    /* Botón carrito */
     #nav-carrito-btn {
       display:none; align-items:center; gap:8px;
       background:var(--blue); color:var(--white) !important;
       padding:8px 18px; border-radius:50px;
-      font-weight:700; font-size:14px;
+      font-weight:700; font-size:14px; font-family:'Poppins',sans-serif;
       cursor:pointer; border:none; transition:.3s; position:relative;
     }
     #nav-carrito-btn:hover { background:var(--blue-dark); transform:translateY(-2px); }
@@ -95,6 +132,14 @@
       display:flex; align-items:center; justify-content:center;
       position:absolute; top:-8px; right:-8px;
     }
+
+    /* Botón salir */
+    .btn-salir {
+      color:#94a3b8; font-weight:600; font-size:14px;
+      background:none; border:none; cursor:pointer;
+      font-family:'Poppins',sans-serif; transition:.2s; padding:8px 12px;
+    }
+    .btn-salir:hover { color:#ef4444; }
 
     /* ===== HERO ===== */
     .hero, .page-hero, .contact {
@@ -111,16 +156,16 @@
       margin:0 auto 28px; box-shadow:0 8px 30px rgba(0,0,0,0.4);
     }
     .hero-slogan {
-      font-size:28px; font-weight:700; letter-spacing:.5px;
+      font-size:30px; font-weight:900; letter-spacing:.5px;
       opacity:.95; max-width:600px; margin:0 auto;
       text-shadow:0 4px 15px rgba(0,0,0,0.3);
     }
     .page-hero h1, .contact h1 {
-      font-size:56px; margin-bottom:15px;
+      font-size:56px; margin-bottom:15px; font-weight:900;
       text-shadow:0 8px 25px rgba(0,0,0,.35);
     }
     .hero p, .page-hero p, .contact .sub {
-      max-width:760px; margin:0 auto; font-size:18px; opacity:.95;
+      max-width:760px; margin:0 auto; font-size:18px; opacity:.95; font-weight:400;
     }
     @keyframes fondo {
       0%   { background-position:0% 50%; }
@@ -129,7 +174,7 @@
     }
 
     /* ===== SECCIONES ===== */
-    .section-title { text-align:center; font-size:36px; margin-bottom:15px; color:var(--dark); }
+    .section-title { text-align:center; font-size:38px; font-weight:900; margin-bottom:15px; color:var(--dark); }
 
     .moving-section {
       display:flex; justify-content:space-between; align-items:center;
@@ -140,7 +185,7 @@
     .moving-wrapper { height:60px; overflow:hidden; position:relative; }
     .moving-text {
       display:inline-flex; gap:60px; white-space:nowrap;
-      font-size:28px; font-weight:bold; color:var(--blue-soft);
+      font-size:26px; font-weight:700; color:var(--blue-soft);
       animation:mover 18s linear infinite;
     }
     .moving-text:hover { animation-play-state:paused; }
@@ -148,10 +193,11 @@
       0%   { transform:translateX(0); }
       100% { transform:translateX(-50%); }
     }
-    .moving-right h2 { font-size:34px; margin-bottom:20px; color:var(--dark); }
-    .moving-right p  { font-size:18px; margin-bottom:20px; color:var(--text); }
-    .moving-right li { margin-bottom:10px; font-size:17px; color:#1e293b; }
+    .moving-right h2 { font-size:34px; font-weight:900; margin-bottom:20px; color:var(--dark); }
+    .moving-right p  { font-size:17px; margin-bottom:20px; color:var(--text); }
+    .moving-right li { margin-bottom:10px; font-size:16px; color:#1e293b; font-weight:600; }
 
+    /* ===== SERVICIOS ===== */
     .services { padding:80px 20px; }
     .cards {
       max-width:1150px; margin:40px auto 0;
@@ -163,13 +209,13 @@
     }
     .card:hover { transform:translateY(-10px) scale(1.02); }
     .icon { font-size:40px; margin-bottom:15px; }
-    .card h3 { margin-bottom:10px; }
-    .card p { font-size:14px; color:#666; line-height:1.6; }
+    .card h3 { margin-bottom:10px; font-weight:700; font-size:18px; }
+    .card p { font-size:14px; color:#666; line-height:1.7; }
 
     /* ===== CATÁLOGO ===== */
     .catalogo-section { padding:80px 20px; text-align:center; }
-    .catalogo-section h1 { font-size:48px; color:var(--dark); }
-    .catalogo-section p  { margin-top:10px; color:#475569; }
+    .catalogo-section h1 { font-size:48px; font-weight:900; color:var(--dark); }
+    .catalogo-section p  { margin-top:10px; color:#475569; font-size:16px; }
     .catalogo {
       max-width:1200px; margin:50px auto 0;
       display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
@@ -177,17 +223,29 @@
     .producto {
       background:var(--white); padding:20px;
       border-radius:var(--radius); box-shadow:var(--shadow); transition:.3s;
+      position:relative; overflow:hidden;
     }
     .producto:hover { transform:translateY(-10px) scale(1.03); }
     .producto img { width:100%; height:220px; object-fit:cover; border-radius:12px; }
     .nombre { margin-top:15px; font-size:18px; color:var(--dark); font-weight:700; }
-    .precio { margin-top:8px; color:var(--blue); font-weight:bold; font-size:18px; }
+    .precio { margin-top:8px; color:var(--blue); font-weight:700; font-size:17px; }
     .btn {
       display:inline-block; margin-top:12px; padding:12px 18px;
       border:none; border-radius:10px; background:var(--blue);
-      color:var(--white); cursor:pointer; transition:.3s; font-weight:bold;
+      color:var(--white); cursor:pointer; transition:.3s; font-weight:700;
+      font-family:'Poppins',sans-serif; font-size:14px;
     }
     .btn:hover { background:var(--blue-dark); }
+
+    /* Tooltip de colores disponibles */
+    .color-tip {
+      position:absolute; top:12px; right:12px;
+      background:rgba(15,23,42,0.85); color:#fff;
+      font-size:11px; font-weight:600; padding:5px 10px; border-radius:20px;
+      opacity:0; transition:.3s; pointer-events:none;
+      backdrop-filter:blur(4px);
+    }
+    .producto:hover .color-tip { opacity:1; }
 
     /* ===== ABOUT ===== */
     .about-content {
@@ -195,15 +253,16 @@
       flex-wrap:wrap; justify-content:center; align-items:flex-start;
     }
     .about-text { max-width:520px; }
-    .about-text h2 { margin-bottom:20px; font-size:32px; }
-    .about-text p  { margin-bottom:15px; line-height:1.8; color:var(--text); }
+    .about-text h2 { margin-bottom:20px; font-size:34px; font-weight:900; }
+    .about-text p  { margin-bottom:15px; line-height:1.9; color:var(--text); font-size:15px; }
     .about-box {
       background:var(--white); padding:35px;
       border-radius:var(--radius); width:320px; box-shadow:var(--shadow);
     }
-    .about-box h3 { margin-bottom:15px; }
-    .about-box li { margin-bottom:12px; color:var(--text); }
+    .about-box h3 { margin-bottom:15px; font-weight:700; font-size:20px; }
+    .about-box li { margin-bottom:12px; color:var(--text); font-weight:600; font-size:15px; }
     .mission { padding:0 20px 80px; display:flex; justify-content:center; gap:30px; flex-wrap:wrap; }
+    .mission .card h3 { font-size:20px; font-weight:900; }
 
     /* ===== CONTACTO ===== */
     .contact { padding:90px 20px; }
@@ -214,32 +273,34 @@
       padding:35px; border-radius:var(--radius); width:320px;
       text-align:left; box-shadow:0 20px 50px rgba(0,0,0,0.3); color:#fff;
     }
-    .info h3 { margin-bottom:20px; }
-    .info p  { margin-bottom:12px; line-height:1.6; color:#fff; }
+    .info h3 { margin-bottom:20px; font-weight:700; font-size:20px; }
+    .info p  { margin-bottom:12px; line-height:1.6; color:#fff; font-size:15px; }
     .social { margin-top:20px; }
-    .social span { display:block; margin-bottom:10px; font-weight:bold; }
-    .social a { display:block; color:var(--blue-soft); margin-top:6px; font-weight:bold; }
+    .social span { display:block; margin-bottom:10px; font-weight:700; }
+    .social a { display:block; color:var(--blue-soft); margin-top:6px; font-weight:700; }
     .form {
       background:var(--white); color:#000; padding:35px;
       border-radius:var(--radius); width:340px;
       box-shadow:0 20px 50px rgba(0,0,0,0.3); text-align:left;
     }
-    .form h3 { margin-bottom:20px; }
+    .form h3 { margin-bottom:20px; font-weight:700; font-size:20px; }
     .form input, .form textarea {
       width:100%; padding:12px; margin-bottom:12px;
       border-radius:10px; border:1px solid #cbd5e1; outline:none;
+      font-family:'Poppins',sans-serif;
     }
     .form textarea { height:120px; resize:none; }
     .form button {
       width:100%; padding:14px; border:none; border-radius:12px;
       background:var(--blue); color:var(--white);
-      font-weight:bold; cursor:pointer; transition:.3s;
+      font-weight:700; cursor:pointer; transition:.3s;
+      font-family:'Poppins',sans-serif; font-size:14px; letter-spacing:1px;
     }
     .form button:hover { background:var(--blue-dark); transform:translateY(-3px); }
 
     footer {
       background:var(--dark-2); color:var(--white);
-      text-align:center; padding:32px 20px; font-size:15px;
+      text-align:center; padding:32px 20px; font-size:15px; font-weight:600;
     }
 
     /* ===== OVERLAY ===== */
@@ -282,6 +343,7 @@
     .modal-acciones button {
       flex:1; padding:13px; border:none; border-radius:14px;
       font-weight:700; font-size:14px; cursor:pointer; transition:.25s;
+      font-family:'Poppins',sans-serif;
     }
     .btn-confirmar { background:var(--blue); color:#fff; }
     .btn-confirmar:hover { background:var(--blue-dark); transform:translateY(-2px); }
@@ -356,20 +418,21 @@
     .c-del:hover { color:#ef4444; transform:scale(1.2); }
     .carrito-pie { padding:18px 24px 22px; border-top:1px solid #f1f5f9; background:#fafafa; }
     .total-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-    .total-row .total-label { font-size:15px; color:var(--muted); }
-    .total-row .total-num { font-size:24px; font-weight:900; color:var(--dark); }
+    .total-row .total-label { font-size:15px; color:var(--muted); font-weight:600; }
+    .total-row .total-num { font-size:22px; font-weight:900; color:var(--dark); }
     .total-row .total-num span { color:var(--blue); }
     .btn-pedido {
       width:100%; padding:15px; border:none; border-radius:16px;
       background:linear-gradient(135deg,var(--blue),#1e40af);
       color:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:.3s;
       display:flex; align-items:center; justify-content:center; gap:8px;
-      box-shadow:0 8px 24px rgba(37,99,235,0.35);
+      box-shadow:0 8px 24px rgba(37,99,235,0.35); font-family:'Poppins',sans-serif;
     }
     .btn-pedido:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(37,99,235,0.45); }
     .btn-vaciar {
       width:100%; padding:10px; border:none; background:none;
       color:#cbd5e1; font-size:12px; cursor:pointer; margin-top:8px; transition:.2s; border-radius:10px;
+      font-family:'Poppins',sans-serif;
     }
     .btn-vaciar:hover { color:#ef4444; background:#fff5f5; }
 
@@ -394,8 +457,9 @@
       .moving-section, .about-content { padding:60px 24px; }
     }
     @media (max-width:768px) {
-      header { flex-direction:column; align-items:flex-start; }
-      nav { gap:14px; }
+      header { flex-direction:column; align-items:flex-start; gap:12px; }
+      nav { gap:10px; }
+      .nav-dropdown { position:fixed; top:auto; left:10px; right:10px; width:auto; }
       .hero,.page-hero,.contact,.catalogo-section { padding:70px 20px; }
       .page-hero h1,.catalogo-section h1,.contact h1 { font-size:34px; }
       .hero-slogan { font-size:22px; }
@@ -426,16 +490,22 @@
     <header>
       <h2 class="brand">InnovaPrint</h2>
       <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
+        <!-- Menú en cascada -->
+        <div class="nav-wrapper">
+          <button class="nav-toggle">Menú</button>
+          <div class="nav-dropdown">
+            <a href="#inicio"> Inicio</a>
+            <a href="#servicios"> Servicios</a>
+            <a href="#catalogo"> Catálogo</a>
+            <a href="#nosotros"> Nosotros</a>
+            <a href="#contacto"> Contacto</a>
+          </div>
+        </div>
         <button id="nav-carrito-btn" onclick="abrirCarrito()">
           🛒 Carrito
           <span class="carrito-badge" id="badge">0</span>
         </button>
-        <a href="#" onclick="cerrarSesion(event)">Salir</a>
+        <button class="btn-salir" onclick="cerrarSesion(event)">Salir</button>
       </nav>
     </header>
 
@@ -460,12 +530,12 @@
         </div>
         <div class="moving-right">
           <h2>¿En qué podemos ayudarte?</h2>
-          <p>En InnovaPrint convertimos tus ideas en productos reales. Diseñamos, imprimimos y entregamos con calidad profesional para que tu marca destaque.</p>
+          <p>En <strong>InnovaPrint</strong> convertimos tus ideas en productos reales. Diseñamos, imprimimos y entregamos con <strong>calidad profesional</strong> para que tu marca destaque.</p>
           <ul>
-            <li>✔ Diseños exclusivos</li>
-            <li>✔ Materiales premium</li>
-            <li>✔ Entrega rápida</li>
-            <li>✔ Atención personalizada</li>
+            <li>✔ <strong>Diseños exclusivos</strong></li>
+            <li>✔ <strong>Materiales premium</strong></li>
+            <li>✔ <strong>Entrega rápida</strong></li>
+            <li>✔ <strong>Atención personalizada</strong></li>
           </ul>
         </div>
       </section>
@@ -476,112 +546,76 @@
           <div class="card">
             <div class="icon">👗</div>
             <h3>Prendas Personalizadas</h3>
-            <p>Diseño, creación y personalización de prendas pensadas para expresar identidad y destacar con autenticidad.</p>
+            <p>Diseño, creación y personalización de prendas pensadas para <strong>expresar identidad</strong> y destacar con autenticidad.</p>
           </div>
           <div class="card">
             <div class="icon">🎨</div>
             <h3>De la Idea a la Entrega</h3>
-            <p>Desde la idea hasta la entrega: diseñamos, confeccionamos y personalizamos moda hecha para ti.</p>
+            <p>Desde la idea hasta la entrega: diseñamos, confeccionamos y personalizamos <strong>moda hecha para ti</strong>.</p>
           </div>
           <div class="card">
             <div class="icon">💡</div>
             <h3>Conceptualización</h3>
-            <p>Conceptualizamos, diseñamos y producimos prendas únicas que transforman tu visión en realidad.</p>
+            <p>Conceptualizamos, diseñamos y producimos prendas únicas que <strong>transforman tu visión</strong> en realidad.</p>
           </div>
           <div class="card">
             <div class="icon">⚡</div>
             <h3>Innovación Total</h3>
-            <p>Innovación en diseño, precisión en producción y personalización total para un estilo sin límites.</p>
+            <p>Innovación en diseño, precisión en producción y <strong>personalización total</strong> para un estilo sin límites.</p>
           </div>
           <div class="card">
             <div class="icon">📖</div>
             <h3>Tu Historia en Moda</h3>
-            <p>Creamos más que ropa: diseñamos, fabricamos y personalizamos piezas que cuentan tu historia.</p>
+            <p>Creamos más que ropa: diseñamos, fabricamos y personalizamos <strong>piezas que cuentan tu historia</strong>.</p>
           </div>
         </div>
       </section>
 
+      <!-- ===== CATÁLOGO ===== -->
       <section class="catalogo-section" id="catalogo">
         <h1>Catálogo</h1>
-        <p>Productos personalizados con calidad profesional.</p>
+        <p>Productos personalizados con <strong>calidad profesional</strong>. Precios en pesos dominicanos.</p>
         <div class="catalogo">
 
+          <!-- T-shirt -->
           <div class="producto">
-            <img src="https://i.postimg.cc/66PnYWQz/Whats-App-Image-2026-03-27-at-8-23-26-PM.jpg" alt="Aretes">
-            <div class="nombre">Aretes</div><div class="precio">$20</div>
-            <button class="btn" onclick="abrirModal('Aretes','$20','https://i.postimg.cc/66PnYWQz/Whats-App-Image-2026-03-27-at-8-23-26-PM.jpg',20)">Comprar</button>
+            <span class="color-tip">🎨 Disponible en Blanco y Azul</span>
+            <img src="https://i.postimg.cc/JhCHV3f9/Whats-App-Image-2026-04-09-at-10-55-01-PM.jpg" alt="T-shirt">
+            <div class="nombre">T-shirt</div>
+            <div class="precio">RD$700</div>
+            <button class="btn" onclick="abrirModal('T-shirt','RD$700','https://i.postimg.cc/JhCHV3f9/Whats-App-Image-2026-04-09-at-10-55-01-PM.jpg',700)">Comprar</button>
           </div>
 
+          <!-- Bolsa -->
           <div class="producto">
-            <img src="https://i.postimg.cc/K82NDG9f/Whats-App-Image-2026-03-27-at-8-23-25-PM.jpg" alt="Sudaderas">
-            <div class="nombre">Sudaderas</div><div class="precio">$15</div>
-            <button class="btn" onclick="abrirModal('Sudaderas','$15','https://i.postimg.cc/K82NDG9f/Whats-App-Image-2026-03-27-at-8-23-25-PM.jpg',15)">Comprar</button>
+            <img src="https://i.postimg.cc/BZz6fcDk/Whats-App-Image-2026-04-09-at-10-45-28-PM.jpg" alt="Bolsa">
+            <div class="nombre">Bolsa</div>
+            <div class="precio">RD$300 – 500</div>
+            <button class="btn" onclick="abrirModal('Bolsa','RD$300–500','https://i.postimg.cc/BZz6fcDk/Whats-App-Image-2026-04-09-at-10-45-28-PM.jpg',400)">Comprar</button>
           </div>
 
+          <!-- Taza -->
           <div class="producto">
-            <img src="https://i.postimg.cc/XqS1CwtB/Whats-App-Image-2026-04-02-at-12-36-39-PM.jpg" alt="Gorra Bordada">
-            <div class="nombre">Gorra Bordada</div><div class="precio">$18</div>
-            <button class="btn" onclick="abrirModal('Gorra Bordada','$18','https://i.postimg.cc/XqS1CwtB/Whats-App-Image-2026-04-02-at-12-36-39-PM.jpg',18)">Comprar</button>
+            <img src="https://i.postimg.cc/QMMCr660/Whats-App-Image-2026-04-09-at-10-37-37-PM.jpg" alt="Taza">
+            <div class="nombre">Taza</div>
+            <div class="precio">RD$400 – 450</div>
+            <button class="btn" onclick="abrirModal('Taza','RD$400–450','https://i.postimg.cc/QMMCr660/Whats-App-Image-2026-04-09-at-10-37-37-PM.jpg',425)">Comprar</button>
           </div>
 
+          <!-- Termo -->
           <div class="producto">
-            <img src="https://i.postimg.cc/Nj9Gst87/Gemini-Generated-Image-yez8jpyez8jpyez8.png" alt="Poloches">
-            <div class="nombre">Poloches</div><div class="precio">$10</div>
-            <button class="btn" onclick="abrirModal('Poloches','$10','https://i.postimg.cc/Nj9Gst87/Gemini-Generated-Image-yez8jpyez8jpyez8.png',10)">Comprar</button>
+            <img src="https://i.postimg.cc/QMMCr660/Whats-App-Image-2026-04-09-at-10-37-37-PM.jpg" alt="Termo">
+            <div class="nombre">Termo</div>
+            <div class="precio">RD$600 – 900</div>
+            <button class="btn" onclick="abrirModal('Termo','RD$600–900','https://i.postimg.cc/QMMCr660/Whats-App-Image-2026-04-09-at-10-37-37-PM.jpg',750)">Comprar</button>
           </div>
 
+          <!-- Gorra -->
           <div class="producto">
-            <img src="https://i.postimg.cc/GpR5tJwC/Gemini-Generated-Image-9jy5kh9jy5kh9jy5.png" alt="Camiseta blanca">
-            <div class="nombre">Camiseta blanca</div><div class="precio">$30</div>
-            <button class="btn" onclick="abrirModal('Camiseta blanca','$30','https://i.postimg.cc/GpR5tJwC/Gemini-Generated-Image-9jy5kh9jy5kh9jy5.png',30)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/HLgqq161/Gemini-Generated-Image-mpzo39mpzo39mpzo.png" alt="Conjunto de accesorios">
-            <div class="nombre">Conjunto de accesorios</div><div class="precio">$25</div>
-            <button class="btn" onclick="abrirModal('Conjunto de accesorios','$25','https://i.postimg.cc/HLgqq161/Gemini-Generated-Image-mpzo39mpzo39mpzo.png',25)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/MH3xw3vV/Gemini-Generated-Image-5z7ghk5z7ghk5z7g.png" alt="Pantalones">
-            <div class="nombre">Pantalones</div><div class="precio">$40</div>
-            <button class="btn" onclick="abrirModal('Pantalones','$40','https://i.postimg.cc/MH3xw3vV/Gemini-Generated-Image-5z7ghk5z7ghk5z7g.png',40)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/J4b30w17/Whats-App-Image-2026-03-27-at-8-23-25-PM-(1).jpg" alt="Cadena">
-            <div class="nombre">Cadena</div><div class="precio">$22</div>
-            <button class="btn" onclick="abrirModal('Cadena','$22','https://i.postimg.cc/J4b30w17/Whats-App-Image-2026-03-27-at-8-23-25-PM-(1).jpg',22)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/fWdqcrwP/Gemini-Generated-Image-cv8moicv8moicv8m.png" alt="Llavero">
-            <div class="nombre">Llavero Personalizado</div><div class="precio">$8</div>
-            <button class="btn" onclick="abrirModal('Llavero Personalizado','$8','https://i.postimg.cc/fWdqcrwP/Gemini-Generated-Image-cv8moicv8moicv8m.png',8)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/25p0Bcmt/Whats-App-Image-2026-04-03-at-12-02-45-AM-(1).jpg" alt="Logo">
-            <div class="nombre">Logo</div><div class="precio">$30</div>
-            <button class="btn" onclick="abrirModal('Logo','$30','https://i.postimg.cc/25p0Bcmt/Whats-App-Image-2026-04-03-at-12-02-45-AM-(1).jpg',30)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/sXj9pbLJ/Whats-App-Image-2026-04-03-at-12-02-45-AM.jpg" alt="Pantalón Jogger">
-            <div class="nombre">Pantalón Jogger</div><div class="precio">$24</div>
-            <button class="btn" onclick="abrirModal('Pantalón Jogger','$24','https://i.postimg.cc/sXj9pbLJ/Whats-App-Image-2026-04-03-at-12-02-45-AM.jpg',24)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/qBZX3bxg/Whats-App-Image-2026-04-03-at-12-03-21-AM.jpg" alt="Taza Personalizada">
-            <div class="nombre">Taza Personalizada</div><div class="precio">$17</div>
-            <button class="btn" onclick="abrirModal('Taza Personalizada','$17','https://i.postimg.cc/qBZX3bxg/Whats-App-Image-2026-04-03-at-12-03-21-AM.jpg',17)">Comprar</button>
-          </div>
-
-          <div class="producto">
-            <img src="https://i.postimg.cc/WtLd7k3V/Whats-App-Image-2026-04-03-at-12-03-05-AM.jpg" alt="Bolsas">
-            <div class="nombre">Bolsas</div><div class="precio">$4</div>
-            <button class="btn" onclick="abrirModal('Bolsas','$4','https://i.postimg.cc/WtLd7k3V/Whats-App-Image-2026-04-03-at-12-03-05-AM.jpg',4)">Comprar</button>
+            <img src="https://i.postimg.cc/5y5bzv7Y/Whats-App-Image-2026-04-09-at-10-37-50-PM.jpg" alt="Gorra">
+            <div class="nombre">Gorra</div>
+            <div class="precio">RD$450 – 700</div>
+            <button class="btn" onclick="abrirModal('Gorra','RD$450–700','https://i.postimg.cc/5y5bzv7Y/Whats-App-Image-2026-04-09-at-10-37-50-PM.jpg',575)">Comprar</button>
           </div>
 
         </div>
@@ -589,43 +623,43 @@
 
       <section class="page-hero" id="nosotros">
         <h1>Sobre Nosotros</h1>
-        <p>Conoce quiénes somos y por qué InnovaPrint es tu mejor aliado creativo.</p>
+        <p>Conoce quiénes somos y por qué <strong>InnovaPrint</strong> es tu mejor aliado creativo.</p>
       </section>
 
       <section class="about-content">
         <div class="about-text">
           <h2>Nuestra Historia</h2>
-          <p>InnovaPrint surgió en 2026, con una simple idea de un grupo de jóvenes: "Convertir las ideas de las personas en diseños únicos y espectaculares". Este grupo de jóvenes creativos, imaginativos e impresionantes, empezaron creando diseños básicos pero súper llamativos, para tazas y camisetas sin imaginar que marcarían recuerdos importantes en las memorias de algunas personas.</p>
-          <p>Con el tiempo, lo que era una simple idea se convirtió en algo transformador. Cada pedido que llegaba marcaba una historia diferente: Regalos, Sorpresa, Recuerdos, Cumpleaños… y así nos convertimos en una tienda de confiabilidad y satisfacción, con el propósito de que las personas puedan expresar sus emociones o recordar algo a través de productos personalizados (diseños).</p>
+          <p>InnovaPrint surgió en <strong>2026</strong>, con una simple idea de un grupo de jóvenes: <em>"Convertir las ideas de las personas en diseños únicos y espectaculares"</em>. Este grupo de jóvenes creativos, imaginativos e impresionantes, empezaron creando diseños básicos pero súper llamativos, para tazas y camisetas sin imaginar que marcarían recuerdos importantes en las memorias de algunas personas.</p>
+          <p>Con el tiempo, lo que era una simple idea se convirtió en algo <strong>transformador</strong>. Cada pedido que llegaba marcaba una historia diferente: Regalos, Sorpresa, Recuerdos, Cumpleaños… y así nos convertimos en una tienda de <strong>confiabilidad y satisfacción</strong>.</p>
         </div>
         <div class="about-box">
           <h3>¿Por qué elegirnos?</h3>
           <ul>
-            <li>✔ Diseños exclusivos y profesionales</li>
-            <li>✔ Materiales de alta calidad</li>
-            <li>✔ Atención personalizada</li>
-            <li>✔ Entrega rápida y segura</li>
-            <li>✔ Compromiso con la satisfacción del cliente</li>
+            <li>✔ <strong>Diseños exclusivos</strong> y profesionales</li>
+            <li>✔ <strong>Materiales de alta calidad</strong></li>
+            <li>✔ <strong>Atención personalizada</strong></li>
+            <li>✔ <strong>Entrega rápida y segura</strong></li>
+            <li>✔ <strong>Compromiso</strong> con la satisfacción del cliente</li>
           </ul>
         </div>
       </section>
 
       <section class="mission">
-        <div class="card"><h3>Misión</h3><p>Brindar soluciones de impresión y diseño que impulsen la identidad y el crecimiento de nuestros clientes.</p></div>
-        <div class="card"><h3>Visión</h3><p>Convertirnos en una empresa líder en servicios creativos y de impresión a nivel nacional.</p></div>
-        <div class="card"><h3>Valores</h3><p>Calidad, Responsabilidad, Innovación, Gratitud, Creatividad y Compromiso por cada producto.</p></div>
+        <div class="card"><h3>Misión</h3><p>Brindar <strong>soluciones de impresión y diseño</strong> que impulsen la identidad y el crecimiento de nuestros clientes.</p></div>
+        <div class="card"><h3>Visión</h3><p>Convertirnos en una <strong>empresa líder</strong> en servicios creativos y de impresión a nivel nacional.</p></div>
+        <div class="card"><h3>Valores</h3><p><strong>Calidad, Responsabilidad, Innovación, Gratitud, Creatividad</strong> y Compromiso por cada producto.</p></div>
       </section>
 
       <section class="contact" id="contacto">
         <h1>Contáctanos</h1>
-        <p class="sub">¿Tienes una idea o proyecto? Escríbenos y lo hacemos realidad.</p>
+        <p class="sub">¿Tienes una idea o proyecto? <strong>Escríbenos y lo hacemos realidad.</strong></p>
         <div class="container">
           <div class="info">
             <h3>Información</h3>
-            <p>📞 +1 809 000 0000</p>
+            <p>📞 <strong>+1 809 000 0000</strong></p>
             <p>📧 innovaprint@gmail.com</p>
             <p>📍 Santo Domingo, República Dominicana</p>
-            <p>🕒 Lun — Sáb | 8:00 AM — 6:00 PM</p>
+            <p>🕒 Lun — Sáb | <strong>8:00 AM — 6:00 PM</strong></p>
             <div class="social">
               <span>Síguenos:</span>
               <a href="https://www.instagram.com/innovaprint_rd?igsh=MTc0bTMxOGRzbnBobg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -648,7 +682,7 @@
       </section>
 
     </main>
-    <footer>© 2026 InnovaPrint — Todos los derechos reservados</footer>
+    <footer>© 2026 <strong>InnovaPrint</strong> — Todos los derechos reservados</footer>
   </div>
 
   <!-- ===== OVERLAY ===== -->
@@ -683,7 +717,7 @@
     <div class="carrito-pie">
       <div class="total-row">
         <span class="total-label">Total estimado</span>
-        <span class="total-num">$<span id="total-num">0</span></span>
+        <span class="total-num">RD$<span id="total-num">0</span></span>
       </div>
       <button class="btn-pedido" onclick="hacerPedido()">💬 Pedir por WhatsApp</button>
       <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
@@ -713,7 +747,6 @@
       elReg.classList.remove("hidden");
     }
 
-    /* Verificar sesión al cargar */
     (function() {
       var u = "";
       try { u = localStorage.getItem("ip_u") || ""; } catch(e) {}
@@ -787,7 +820,7 @@
       var html = "";
       for (var i = 0; i < carrito.length; i++) {
         var it = carrito[i];
-        html += '<div class="ci"><img src="' + it.img + '" alt="' + it.nombre + '"><div class="ci-data"><div class="ci-nom">' + it.nombre + '</div><div class="ci-sub">' + it.precio + ' × ' + it.cantidad + ' = <span>$' + (it.num * it.cantidad) + '</span></div></div><div class="ci-controles"><button class="c-btn" onclick="cambiarCantidad(' + i + ',-1)">−</button><span class="c-cant">' + it.cantidad + '</span><button class="c-btn" onclick="cambiarCantidad(' + i + ',1)">+</button><button class="c-del" onclick="eliminar(' + i + ')">🗑</button></div></div>';
+        html += '<div class="ci"><img src="' + it.img + '" alt="' + it.nombre + '"><div class="ci-data"><div class="ci-nom">' + it.nombre + '</div><div class="ci-sub">' + it.precio + ' × ' + it.cantidad + ' = <span>RD$' + (it.num * it.cantidad) + '</span></div></div><div class="ci-controles"><button class="c-btn" onclick="cambiarCantidad(' + i + ',-1)">−</button><span class="c-cant">' + it.cantidad + '</span><button class="c-btn" onclick="cambiarCantidad(' + i + ',1)">+</button><button class="c-del" onclick="eliminar(' + i + ')">🗑</button></div></div>';
       }
       lista.innerHTML = html;
     }
@@ -804,8 +837,11 @@
 
     function hacerPedido() {
       var total = 0, lista = "";
-      for (var i = 0; i < carrito.length; i++) { total += carrito[i].num * carrito[i].cantidad; lista += "• " + carrito[i].nombre + " x" + carrito[i].cantidad + " ($" + (carrito[i].num * carrito[i].cantidad) + ")\n"; }
-      var msg = encodeURIComponent("Hola InnovaPrint! 👋\nMe gustaría hacer este pedido:\n\n" + lista + "\n💰 Total: $" + total);
+      for (var i = 0; i < carrito.length; i++) {
+        total += carrito[i].num * carrito[i].cantidad;
+        lista += "• " + carrito[i].nombre + " x" + carrito[i].cantidad + " (RD$" + (carrito[i].num * carrito[i].cantidad) + ")\n";
+      }
+      var msg = encodeURIComponent("Hola InnovaPrint! 👋\nMe gustaría hacer este pedido:\n\n" + lista + "\n💰 Total: RD$" + total);
       window.open("https://wa.me/18090000000?text=" + msg, "_blank");
     }
 
